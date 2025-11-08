@@ -87,28 +87,28 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="luxury-container">
-          <div className="flex justify-between items-center h-24">
+          <div className="flex justify-between items-center py-4">
             {/* Luxury Logo */}
-            <Link href="/" className="flex items-center group">
+            <Link href="/" className="flex items-center group flex-shrink-0">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3"
+                className="flex items-center gap-3 md:gap-4"
               >
                 {/* Logo Icon with Gold Gradient */}
-                <div className="relative">
+                <div className="relative flex-shrink-0">
                   <div className="absolute inset-0 bg-gradient-gold rounded-xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity"></div>
-                  <div className="relative w-12 h-12 bg-gradient-gold rounded-xl flex items-center justify-center shadow-gold-glow">
+                  <div className="relative w-12 h-12 bg-gradient-gold rounded-xl flex items-center justify-center shadow-gold-glow flex-shrink-0">
                     <span className="text-black font-bold text-xl font-serif">FC</span>
                   </div>
                 </div>
 
                 {/* Logo Text */}
-                <div className="hidden sm:block">
-                  <h1 className="font-serif text-2xl font-bold text-white tracking-tight">
+                <div className="hidden sm:block min-w-fit">
+                  <h1 className="font-serif text-xl md:text-2xl font-bold text-white tracking-tight leading-tight">
                     Fusion Cars
                   </h1>
-                  <p className="text-xs text-luxury-gold uppercase tracking-widest font-semibold">
+                  <p className="text-xs text-luxury-gold uppercase tracking-widest font-semibold leading-tight">
                     Luxury Collection
                   </p>
                 </div>
