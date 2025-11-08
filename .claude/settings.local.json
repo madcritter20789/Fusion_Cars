@@ -15,7 +15,14 @@
       "Bash(cat:*)",
       "Bash(netstat:*)",
       "Bash(taskkill:*)",
-      "Bash(mongod:*)"
+      "Bash(mongod:*)",
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nDocs: Add production setup and Railway configuration fix guides\n\n- Added PRODUCTION_SETUP_GUIDE.md with complete environment setup instructions\n- Added RAILWAY_CONFIGURATION_FIX.md with troubleshooting for \"Route not found\" error\n- Documented critical Railway settings (Root Directory must be BE_FusionCars)\n- Provided step-by-step instructions for Vercel frontend configuration\n- Included complete troubleshooting checklist\n- Local backend verified working correctly\n\nThese guides help fix the \"Network error\" in production caused by:\n1. Missing or incorrect environment variables on Railway\n2. Incorrect root directory configuration\n3. Frontend not knowing the backend API URL\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(RAILWAY_CONFIGURATION_FIX.md)",
+      "Bash(timeout 10 npm start:*)",
+      "Bash(PRODUCTION_SETUP_GUIDE.md)"
     ],
     "deny": [],
     "ask": []
