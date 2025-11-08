@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, Phone, Mail, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ThemeToggle from './ThemeToggle';
 
 /**
  * Luxury Navbar Component - PREMIUM REDESIGN
@@ -116,7 +115,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden lg:flex items-center gap-10">
+            <div className="hidden lg:flex items-center gap-6">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.name}
@@ -137,10 +136,8 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Right Section - CTA & Theme Toggle */}
-            <div className="flex items-center gap-5">
-              <ThemeToggle />
-
+            {/* Right Section - CTA Button */}
+            <div className="flex items-center gap-4">
               {/* Premium CTA Button */}
               <Link href="/contact" className="hidden sm:block">
                 <motion.button
