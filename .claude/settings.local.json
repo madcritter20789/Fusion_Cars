@@ -22,7 +22,12 @@
       "Bash(git push:*)",
       "Bash(RAILWAY_CONFIGURATION_FIX.md)",
       "Bash(timeout 10 npm start:*)",
-      "Bash(PRODUCTION_SETUP_GUIDE.md)"
+      "Bash(PRODUCTION_SETUP_GUIDE.md)",
+      "Bash(xargs:*)",
+      "Bash(git commit:*)",
+      "Bash(tree /F /A \"D:\\Utkarsh\\Fusion_Cars\\BE_FusionCars\\src\")",
+      "Bash(tree:*)",
+      "Bash(\"D:\\Utkarsh\\Fusion_Cars\\ARCHITECTURE_ANALYSIS.md\")"
     ],
     "deny": [],
     "ask": []
