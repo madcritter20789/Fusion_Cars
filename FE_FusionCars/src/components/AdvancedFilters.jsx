@@ -92,8 +92,8 @@ export default function AdvancedFilters({
       >
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Sliders size={24} className="text-accent-gold" />
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <Sliders size={20} className="text-accent-gold" />
             Filters
           </h2>
           {showMobile && (
@@ -377,7 +377,7 @@ function FilterSection({ title, isExpanded, onToggle, icon, children }) {
         onClick={onToggle}
         className="w-full p-4 flex items-center justify-between hover:bg-primary-charcoal transition"
       >
-        <h3 className="text-accent-platinum font-semibold flex items-center gap-2">
+        <h3 className="text-sm font-semibold text-accent-platinum flex items-center gap-2">
           {icon}
           {title}
         </h3>
