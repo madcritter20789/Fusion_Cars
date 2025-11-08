@@ -198,6 +198,7 @@ export default function CarDetail() {
             {/* Tab Navigation */}
             <div className="flex gap-4 overflow-x-auto pb-4">
               {[
+                { id: 'gallery', label: 'Gallery' },
                 { id: 'overview', label: 'Overview' },
                 { id: 'inspection', label: 'Inspection Report' },
                 { id: 'reviews', label: 'Customer Reviews' },
@@ -218,6 +219,7 @@ export default function CarDetail() {
             </div>
 
             {/* Tab Content */}
+            {activeTab === 'gallery' && <GalleryTab car={car} />}
             {activeTab === 'overview' && <OverviewTab car={car} />}
             {activeTab === 'inspection' && <InspectionReport car={car} />}
             {activeTab === 'reviews' && <ReviewSystem carId={car.id} carName={`${car.brand} ${car.model}`} />}
@@ -359,6 +361,25 @@ function SpecificationsTab({ car }) {
             </div>
           ))}
         </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// Gallery Tab Component
+function GalleryTab({ car }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="space-y-6"
+    >
+      <div className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal">
+        <h3 className="text-2xl font-bold text-white mb-4">Image Gallery</h3>
+        <p className="text-accent-stone mb-6">
+          Browse through our extensive collection of high-quality images of this vehicle
+        </p>
+        <CarImageGallery car={car} />
       </div>
     </motion.div>
   );
