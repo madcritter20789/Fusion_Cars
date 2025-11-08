@@ -35,6 +35,8 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Collection', href: '/inventory' },
+    { name: 'Compare', href: '/advanced-compare' },
+    { name: 'Financing', href: '/financing-calculator' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ];
