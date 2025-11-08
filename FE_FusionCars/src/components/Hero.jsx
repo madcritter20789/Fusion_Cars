@@ -165,7 +165,7 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
             {/* Premium Search Bar - Enhanced Blur */}
             <motion.div
               variants={itemVariants}
-              className="blur-modern rounded-2xl p-2 flex flex-col sm:flex-row gap-3 shadow-luxury-lg"
+              className="blur-modern rounded-2xl p-2 flex flex-col sm:flex-row gap-3 shadow-luxury-lg overflow-hidden"
             >
               <input
                 type="text"
@@ -175,15 +175,15 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
                 className="flex-1 px-6 py-4 rounded-xl bg-white/5 text-white placeholder-neutral-400 border border-white/10 focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition-all"
                 aria-label="Search luxury cars"
               />
-              <Link href="/inventory">
+              <Link href="/inventory" className="overflow-hidden">
                 <motion.button
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="btn-secondary w-full sm:w-auto px-8 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden"
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="btn-secondary w-full sm:w-auto px-8 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden h-full"
                   aria-label="Search our collection"
                 >
                   <Search className="w-5 h-5 relative z-10" />
-                  <span className="relative z-10">Explore Collection</span>
+                  <span className="relative z-10">Search</span>
                 </motion.button>
               </Link>
             </motion.div>

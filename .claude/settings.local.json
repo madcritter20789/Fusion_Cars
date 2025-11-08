@@ -10,7 +10,9 @@
       "Bash(npm install)",
       "Bash(npm run dev:*)",
       "Bash(npm run build:*)",
-      "Bash(nul)"
+      "Bash(nul)",
+      "Bash(tree D:UtkarshFusion_CarsBE_FusionCarssrc /F 2)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

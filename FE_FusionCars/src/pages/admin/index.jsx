@@ -178,6 +178,18 @@ export default function AdminDashboard() {
                   {tab.charAt(0).toUpperCase() + tab.slice(1)}
                 </button>
               ))}
+              <button
+                onClick={() => router.push('/admin/users')}
+                className="py-4 px-2 border-b-2 border-transparent text-accent-stone hover:text-white transition"
+              >
+                Users
+              </button>
+              <button
+                onClick={() => router.push('/admin/messages')}
+                className="py-4 px-2 border-b-2 border-transparent text-accent-stone hover:text-white transition"
+              >
+                Messages
+              </button>
             </nav>
           </div>
         </div>
@@ -315,19 +327,9 @@ export default function AdminDashboard() {
             </>
           )}
 
-          {activeTab === 'bookings' && (
-            <div className="text-white">
-              <h2 className="text-2xl font-bold mb-4">Bookings Management</h2>
-              <p className="text-accent-stone">Booking management interface coming soon...</p>
-            </div>
-          )}
+          {activeTab === 'bookings' && <BookingsSection stats={stats} />}
 
-          {activeTab === 'reviews' && (
-            <div className="text-white">
-              <h2 className="text-2xl font-bold mb-4">Review Moderation</h2>
-              <p className="text-accent-stone">Review moderation interface coming soon...</p>
-            </div>
-          )}
+          {activeTab === 'reviews' && <ReviewsSection stats={stats} />}
         </main>
       </div>
     </>
@@ -356,5 +358,260 @@ function StatCard({ icon: Icon, title, value, subtitle, color }) {
       <p className="text-3xl font-bold mt-1">{value}</p>
       <p className="text-sm opacity-75 mt-2">{subtitle}</p>
     </motion.div>
+  );
+}
+
+function BookingsSection({ stats }) {
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState('all');
+
+  useEffect(() => {
+    fetchBookings();
+  }, [filter]);
+
+  const fetchBookings = async () => {
+    try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('adminToken') : null;
+      let url = `${API_ENDPOINTS.adminBookings}`;
+      if (filter !== 'all') {
+        url += `?status=${filter}`;
+      }
+
+      const res = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      setBookings(data.data || []);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+      setLoading(false);
+    }
+  };
+
+  const updateBookingStatus = async (bookingId, status) => {
+    try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('adminToken') : null;
+      await fetch(`${API_ENDPOINTS.adminBookings}/${bookingId}/status`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ status }),
+      });
+      fetchBookings();
+    } catch (error) {
+      console.error('Error updating booking:', error);
+    }
+  };
+
+  if (loading) {
+    return <div className="text-white">Loading bookings...</div>;
+  }
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold text-white">Bookings Management</h2>
+        <div className="flex gap-2">
+          {['all', 'pending', 'confirmed', 'completed', 'cancelled'].map((status) => (
+            <button
+              key={status}
+              onClick={() => setFilter(status)}
+              className={`px-4 py-2 rounded-lg transition ${
+                filter === status
+                  ? 'bg-accent-silver text-primary-black'
+                  : 'bg-primary-dark text-white hover:bg-accent-charcoal'
+              }`}
+            >
+              {status.charAt(0).toUpperCase() + status.slice(1)}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4">
+        {bookings.map((booking) => (
+          <motion.div
+            key={booking._id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h3 className="text-lg font-bold text-white">{booking.customerName}</h3>
+                <p className="text-accent-stone text-sm">{booking.customerEmail}</p>
+                <p className="text-accent-stone text-sm">{booking.customerPhone}</p>
+              </div>
+              <span
+                className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                  booking.status === 'confirmed'
+                    ? 'bg-green-600 text-white'
+                    : booking.status === 'completed'
+                    ? 'bg-blue-600 text-white'
+                    : booking.status === 'cancelled'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-yellow-600 text-white'
+                }`}
+              >
+                {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <p className="text-accent-stone text-sm">Booking Type</p>
+                <p className="text-white font-semibold">{booking.bookingType}</p>
+              </div>
+              <div>
+                <p className="text-accent-stone text-sm">Booking Date</p>
+                <p className="text-white font-semibold">
+                  {new Date(booking.bookingDate).toLocaleDateString()}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => updateBookingStatus(booking._id, 'confirmed')}
+                className="flex items-center gap-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm"
+              >
+                <CheckCircle size={16} />
+                Confirm
+              </button>
+              <button
+                onClick={() => updateBookingStatus(booking._id, 'completed')}
+                className="flex items-center gap-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm"
+              >
+                <CheckCircle size={16} />
+                Complete
+              </button>
+              <button
+                onClick={() => updateBookingStatus(booking._id, 'cancelled')}
+                className="flex items-center gap-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm"
+              >
+                <XCircle size={16} />
+                Cancel
+              </button>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ReviewsSection({ stats }) {
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
+  const fetchReviews = async () => {
+    try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('adminToken') : null;
+      const res = await fetch(`${API_ENDPOINTS.adminReviews}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      setReviews(data.data || []);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+      setLoading(false);
+    }
+  };
+
+  const updateReviewStatus = async (reviewId, status) => {
+    try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('adminToken') : null;
+      await fetch(`${API_ENDPOINTS.adminReviews}/${reviewId}/status`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ status }),
+      });
+      fetchReviews();
+    } catch (error) {
+      console.error('Error updating review:', error);
+    }
+  };
+
+  if (loading) {
+    return <div className="text-white">Loading reviews...</div>;
+  }
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold text-white mb-6">Review Moderation</h2>
+
+      <div className="grid grid-cols-1 gap-4">
+        {reviews.map((review) => (
+          <motion.div
+            key={review._id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h3 className="text-lg font-bold text-white">{review.title}</h3>
+                <p className="text-accent-stone text-sm">By {review.userName}</p>
+                <div className="flex gap-1 mt-2">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      size={16}
+                      className={i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-600'}
+                    />
+                  ))}
+                </div>
+              </div>
+              <span
+                className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                  review.status === 'approved'
+                    ? 'bg-green-600 text-white'
+                    : review.status === 'rejected'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-yellow-600 text-white'
+                }`}
+              >
+                {review.status.charAt(0).toUpperCase() + review.status.slice(1)}
+              </span>
+            </div>
+
+            <p className="text-white mb-4">{review.comment}</p>
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => updateReviewStatus(review._id, 'approved')}
+                className="flex items-center gap-1 px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm"
+              >
+                <CheckCircle size={16} />
+                Approve
+              </button>
+              <button
+                onClick={() => updateReviewStatus(review._id, 'rejected')}
+                className="flex items-center gap-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm"
+              >
+                <XCircle size={16} />
+                Reject
+              </button>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
   );
 }
