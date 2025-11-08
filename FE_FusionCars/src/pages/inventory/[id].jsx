@@ -6,7 +6,8 @@ import Footer from '../../components/Footer';
 import CarImageGallery from '../../components/CarImageGallery';
 import InspectionReport from '../../components/InspectionReport';
 import ReviewSystem from '../../components/ReviewSystem';
-import { Heart, MessageCircle, Download, Share2, Phone, Mail } from 'lucide-react';
+import CarDetailsComparison from '../../components/CarDetailsComparison';
+import { Heart, MessageCircle, Download, Share2, Phone, Mail, Sliders } from 'lucide-react';
 import { motion } from 'framer-motion';
 import cars from '../../data/cars.json';
 
@@ -27,6 +28,7 @@ export default function CarDetail() {
   const { id } = router.query;
   const [activeTab, setActiveTab] = useState('overview');
   const [isFavorite, setIsFavorite] = useState(false);
+  const [showComparison, setShowComparison] = useState(false);
 
   // Find car in the database
   const car = cars.cars.find((c) => c.id === parseInt(id));
@@ -135,6 +137,14 @@ export default function CarDetail() {
                     Book Test Drive
                   </button>
 
+                  <button
+                    onClick={() => setShowComparison(true)}
+                    className="w-full py-3 px-4 bg-primary-charcoal border border-accent-charcoal text-accent-platinum rounded-lg font-bold hover:border-accent-gold transition flex items-center justify-center gap-2"
+                  >
+                    <Sliders size={20} />
+                    Compare Cars
+                  </button>
+
                   <button className="w-full py-3 px-4 bg-primary-charcoal border border-accent-charcoal text-accent-platinum rounded-lg font-bold hover:border-accent-gold transition flex items-center justify-center gap-2">
                     <Share2 size={20} />
                     Share
@@ -227,6 +237,13 @@ export default function CarDetail() {
           </motion.div>
         </div>
       </div>
+
+      {/* Comparison Modal */}
+      <CarDetailsComparison
+        currentCar={car}
+        isOpen={showComparison}
+        onClose={() => setShowComparison(false)}
+      />
 
       <Footer />
     </>
