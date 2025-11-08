@@ -3,6 +3,7 @@ import { useState, useMemo } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CarCard from '../components/CarCard';
+import AdvancedFilters from '../components/AdvancedFilters';
 import cars from '../data/cars.json';
 import { motion } from 'framer-motion';
 import { Filter, X } from 'lucide-react';
@@ -24,6 +25,9 @@ export default function Inventory() {
     priceRange: [0, 10000000],
     transmission: '',
     search: '',
+    yearRange: [2015, 2024],
+    mileageRange: [0, 50],
+    minRating: '',
   });
 
   const [sortBy, setSortBy] = useState('featured');
@@ -41,11 +45,26 @@ export default function Inventory() {
       const matchFuel = !filters.fuelType || car.fuelType === filters.fuelType;
       const matchPrice = car.price >= filters.priceRange[0] && car.price <= filters.priceRange[1];
       const matchTransmission = !filters.transmission || car.transmission === filters.transmission;
+      const matchYear = car.year >= filters.yearRange[0] && car.year <= filters.yearRange[1];
+      const matchMileage = !filters.mileageRange ||
+        (car.mileage &&
+         parseFloat(car.mileage) >= filters.mileageRange[0] &&
+         parseFloat(car.mileage) <= filters.mileageRange[1]);
+      const matchRating = !filters.minRating || (car.rating >= filters.minRating);
       const matchSearch =
         car.name.toLowerCase().includes(filters.search.toLowerCase()) ||
         car.brand.toLowerCase().includes(filters.search.toLowerCase());
 
-      return matchBrand && matchFuel && matchPrice && matchTransmission && matchSearch;
+      return (
+        matchBrand &&
+        matchFuel &&
+        matchPrice &&
+        matchTransmission &&
+        matchYear &&
+        matchMileage &&
+        matchRating &&
+        matchSearch
+      );
     });
 
     // Sort
@@ -83,6 +102,9 @@ export default function Inventory() {
       priceRange: [0, 10000000],
       transmission: '',
       search: '',
+      yearRange: [2015, 2024],
+      mileageRange: [0, 50],
+      minRating: '',
     });
   };
 
@@ -112,150 +134,31 @@ export default function Inventory() {
       <div className="min-h-screen bg-primary-black py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Sidebar Filters */}
-            <motion.aside
-              className={`lg:col-span-1 ${showFilters ? 'block' : 'hidden lg:block'}`}
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              aria-label="Filters"
-            >
-              <div className="bg-primary-dark rounded-lg p-6 shadow-lg">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                    <Filter className="w-5 h-5" />
-                    Filters
-                  </h2>
-                  <button
-                    onClick={() => setShowFilters(false)}
-                    className="lg:hidden"
-                    aria-label="Close filters"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
+            {/* Sidebar Filters - Desktop */}
+            <div className="hidden lg:block lg:col-span-1">
+              <AdvancedFilters
+                filters={filters}
+                onFilterChange={handleFilterChange}
+                onReset={resetFilters}
+                brands={brands}
+                fuelTypes={fuelTypes}
+                transmissions={transmissions}
+              />
+            </div>
 
-                {/* Search */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-accent-silver mb-2">
-                    Search
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Car name or brand..."
-                    value={filters.search}
-                    onChange={(e) => handleFilterChange('search', e.target.value)}
-                    className="w-full px-4 py-2 bg-primary-black border border-accent-charcoal text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue placeholder-accent-stone"
-                    aria-label="Search cars"
-                  />
-                </div>
-
-                {/* Brand Filter */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-accent-silver mb-2">
-                    Brand
-                  </label>
-                  <select
-                    value={filters.brand}
-                    onChange={(e) => handleFilterChange('brand', e.target.value)}
-                    className="w-full px-4 py-2 bg-primary-black border border-accent-charcoal text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue"
-                    aria-label="Filter by brand"
-                  >
-                    <option value="">All Brands</option>
-                    {brands.map((brand) => (
-                      <option key={brand} value={brand}>
-                        {brand}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Fuel Type Filter */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-accent-silver mb-2">
-                    Fuel Type
-                  </label>
-                  <select
-                    value={filters.fuelType}
-                    onChange={(e) => handleFilterChange('fuelType', e.target.value)}
-                    className="w-full px-4 py-2 bg-primary-black border border-accent-charcoal text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue"
-                    aria-label="Filter by fuel type"
-                  >
-                    <option value="">All Types</option>
-                    {fuelTypes.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Transmission Filter */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-accent-silver mb-2">
-                    Transmission
-                  </label>
-                  <select
-                    value={filters.transmission}
-                    onChange={(e) => handleFilterChange('transmission', e.target.value)}
-                    className="w-full px-4 py-2 bg-primary-black border border-accent-charcoal text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue"
-                    aria-label="Filter by transmission"
-                  >
-                    <option value="">All Types</option>
-                    {transmissions.map((trans) => (
-                      <option key={trans} value={trans}>
-                        {trans}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Price Range */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-accent-silver mb-2">
-                    Price Range (₹)
-                  </label>
-                  <div className="space-y-2">
-                    <input
-                      type="number"
-                      placeholder="Min Price"
-                      value={filters.priceRange[0]}
-                      onChange={(e) =>
-                        handleFilterChange('priceRange', [
-                          Number(e.target.value) || 0,
-                          filters.priceRange[1],
-                        ])
-                      }
-                      className="w-full px-3 py-2 bg-primary-black border border-accent-charcoal text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue placeholder-accent-stone text-sm"
-                      aria-label="Minimum price"
-                    />
-                    <input
-                      type="number"
-                      placeholder="Max Price"
-                      value={filters.priceRange[1]}
-                      onChange={(e) =>
-                        handleFilterChange('priceRange', [
-                          filters.priceRange[0],
-                          Number(e.target.value) || 10000000,
-                        ])
-                      }
-                      className="w-full px-3 py-2 bg-primary-black border border-accent-charcoal text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue placeholder-accent-stone text-sm"
-                      aria-label="Maximum price"
-                    />
-                  </div>
-                </div>
-
-                {/* Reset Button */}
-                <motion.button
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={resetFilters}
-                  className="w-full btn-secondary-silver py-3 rounded-lg font-bold relative overflow-hidden"
-                  aria-label="Reset filters"
-                >
-                  <span className="relative z-10">Reset Filters</span>
-                </motion.button>
-              </div>
-            </motion.aside>
+            {/* Mobile Filters Modal */}
+            {showFilters && (
+              <AdvancedFilters
+                filters={filters}
+                onFilterChange={handleFilterChange}
+                onReset={resetFilters}
+                brands={brands}
+                fuelTypes={fuelTypes}
+                transmissions={transmissions}
+                showMobile={true}
+                onClose={() => setShowFilters(false)}
+              />
+            )}
 
             {/* Main Content */}
             <div className="lg:col-span-3">

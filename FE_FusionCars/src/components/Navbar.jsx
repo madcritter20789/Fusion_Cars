@@ -38,6 +38,7 @@ export default function Navbar() {
     { name: 'Gallery', href: '/gallery' },
     { name: 'Compare', href: '/advanced-compare' },
     { name: 'Financing', href: '/financing-calculator' },
+    { name: 'Wishlist', href: '/wishlist' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ];
