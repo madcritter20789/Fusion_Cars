@@ -97,11 +97,11 @@ In Railway Dashboard:
 |---|------|-------|
 | 1 | `PORT` | `5000` |
 | 2 | `NODE_ENV` | `production` |
-| 3 | `MONGODB_URI` | `mongodb+srv://fusionuser:FusionPass123@fusiondb.mongodb.net/fusion-cars?retryWrites=true&w=majority` |
-| 4 | `JWT_SECRET` | `b433550cf678306ac4a42b3b3aadb5670b5918205eb3fad836654302063848fe4e53e432753560cecee433d8d5f61086427aa03b6b5243bb609a5267cc7786ad` |
-| 5 | `FRONTEND_URL` | `https://fusion-cars.vercel.app` |
-| 6 | `ADMIN_REGISTRATION_KEY` | `9af7861c00aec7b1ad34c62ca0e6007782a4c4ef2df99ec757808986f704fcb1` |
-| 7 | `CORS_ORIGIN` | `https://fusion-cars.vercel.app,https://www.fusion-cars.vercel.app` |
+| 3 | `MONGODB_URI` | `mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/fusion-cars?retryWrites=true&w=majority` |
+| 4 | `JWT_SECRET` | `[GENERATE NEW - DO NOT USE EXAMPLE]` |
+| 5 | `FRONTEND_URL` | `https://your-vercel-domain.vercel.app` |
+| 6 | `ADMIN_REGISTRATION_KEY` | `[GENERATE NEW - DO NOT USE EXAMPLE]` |
+| 7 | `CORS_ORIGIN` | `https://your-vercel-domain.vercel.app,https://www.your-vercel-domain.vercel.app` |
 
 📋 **Tip**: Open `RAILWAY_KEYS_VALUES.txt` and copy-paste from there
 

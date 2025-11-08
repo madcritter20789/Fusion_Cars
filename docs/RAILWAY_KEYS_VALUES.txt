@@ -20,36 +20,48 @@ Value: production
 VARIABLE 3 - MONGODB CONNECTION STRING
 ================================================================================
 Key:   MONGODB_URI
-Value: mongodb+srv://fusionuser:FusionPass123@fusiondb.mongodb.net/fusion-cars?retryWrites=true&w=majority
-
-Note: If using your own MongoDB Atlas:
 Value: mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@YOUR_CLUSTER.mongodb.net/fusion-cars?retryWrites=true&w=majority
+
+⚠️  IMPORTANT: DO NOT commit real credentials to GitHub!
+Instructions:
+1. Get connection string from MongoDB Atlas
+2. Replace YOUR_USERNAME with your database user
+3. Replace YOUR_PASSWORD with your database password
+4. Replace YOUR_CLUSTER with your cluster name
+5. Store in Railway dashboard, NOT in git
 
 ================================================================================
 VARIABLE 4 - JWT SECRET TOKEN
 ================================================================================
 Key:   JWT_SECRET
-Value: b433550cf678306ac4a42b3b3aadb5670b5918205eb3fad836654302063848fe4e53e432753560cecee433d8d5f61086427aa03b6b5243bb609a5267cc7786ad
+Value: [GENERATE NEW - DO NOT USE EXAMPLE]
 
-Length: 128 characters (secure)
-Keep Safe: Do NOT share this value
+⚠️  IMPORTANT: Generate a new JWT secret!
+How to generate:
+- Node.js: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+- Keep it 128 characters long
+- Keep Safe: Do NOT commit to git or share
 
 ================================================================================
 VARIABLE 5 - FRONTEND URL
 ================================================================================
 Key:   FRONTEND_URL
-Value: https://fusion-cars.vercel.app
+Value: https://your-frontend-domain.vercel.app
 
 Note: Update after you deploy frontend to Vercel
+Example: https://fusion-cars.vercel.app
 
 ================================================================================
 VARIABLE 6 - ADMIN REGISTRATION KEY
 ================================================================================
 Key:   ADMIN_REGISTRATION_KEY
-Value: 9af7861c00aec7b1ad34c62ca0e6007782a4c4ef2df99ec757808986f704fcb1
+Value: [GENERATE NEW - DO NOT USE EXAMPLE]
 
-Length: 64 characters (secure)
-Keep Safe: Do NOT share this value
+⚠️  IMPORTANT: Generate a new admin registration key!
+How to generate:
+- Use 64 random alphanumeric + special characters
+- PowerShell: $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*'; $randomString = -join ((1..64) | ForEach-Object { Get-Random -InputObject $characters.ToCharArray() }); Write-Host $randomString
+- Keep Safe: Do NOT commit to git or share
 
 ================================================================================
 VARIABLE 7 - CORS ORIGIN (OPTIONAL BUT RECOMMENDED)
