@@ -28,39 +28,58 @@ export default function CarCard({ car }) {
   return (
     <Link href={`/inventory/${car.id || '#'}`}>
       <motion.article
-        className="group relative bg-primary-dark rounded-2xl overflow-hidden border border-white/5 hover:border-luxury-gold/30 transition-all duration-500 h-full flex flex-col cursor-pointer"
+        className="group relative bg-primary-dark rounded-2xl overflow-hidden border border-white/5 hover:border-luxury-gold/30 transition-all duration-500 h-full flex flex-col cursor-pointer card-3d spotlight"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        whileHover={{ y: -12 }}
+        whileHover={{
+          y: -16,
+          rotateX: 1,
+          rotateY: -1,
+          transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+        }}
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
         style={{
           boxShadow: isHovered
-            ? '0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(212, 175, 55, 0.15)'
-            : '0 4px 16px rgba(0, 0, 0, 0.2)',
+            ? '0 25px 70px rgba(0, 0, 0, 0.5), 0 0 50px rgba(212, 175, 55, 0.2), 0 10px 30px rgba(212, 175, 55, 0.1)'
+            : '0 4px 20px rgba(0, 0, 0, 0.25)',
         }}
         aria-label={`${car.brand} ${car.model} - ${car.priceInWords}`}
       >
         {/* Premium Image Container */}
         <div className="relative h-64 overflow-hidden bg-gradient-to-br from-neutral-900 to-black">
+          {/* Car Image with Modern Blur Background */}
+          <motion.div
+            className="absolute inset-0 blur-2xl scale-110 opacity-50"
+            style={{
+              backgroundImage: `url(${car.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+            animate={{
+              scale: isHovered ? 1.15 : 1.1,
+            }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          />
+
           {/* Car Image */}
           <motion.img
             src={car.image}
             alt={`${car.brand} ${car.model} - Premium luxury vehicle`}
-            className="w-full h-full object-cover"
+            className="relative w-full h-full object-cover z-10"
             animate={{
-              scale: isHovered ? 1.1 : 1,
+              scale: isHovered ? 1.08 : 1,
             }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             loading="lazy"
           />
 
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          {/* Enhanced Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-20"></div>
 
           {/* Gold Shine Effect on Hover */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-tr from-transparent via-luxury-gold/5 to-transparent"
+            className="absolute inset-0 bg-gradient-to-tr from-transparent via-luxury-gold/5 to-transparent z-20"
             initial={{ x: '-100%', opacity: 0 }}
             animate={{
               x: isHovered ? '100%' : '-100%',
@@ -74,7 +93,7 @@ export default function CarCard({ car }) {
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute top-4 right-4 px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider premium-badge flex items-center gap-1.5"
+              className="absolute top-4 right-4 px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider premium-badge flex items-center gap-1.5 z-30 glow-pulse"
             >
               <Star className="w-3 h-3 fill-current" />
               Featured
@@ -84,7 +103,7 @@ export default function CarCard({ car }) {
           {/* Wishlist Button - Glass Effect */}
           <motion.button
             onClick={toggleFavorite}
-            className="absolute top-4 left-4 glass-light p-2.5 rounded-full shadow-luxury hover:shadow-luxury-lg transition-all border border-white/20"
+            className="absolute top-4 left-4 blur-modern p-2.5 rounded-full shadow-luxury hover:shadow-luxury-lg transition-all border border-white/20 z-30"
             whileHover={{ scale: 1.15 }}
             whileTap={{ scale: 0.9 }}
             aria-label={
@@ -104,7 +123,7 @@ export default function CarCard({ car }) {
           </motion.button>
 
           {/* Rating Badge - Bottom Left */}
-          <div className="absolute bottom-4 left-4 glass rounded-full px-3 py-1.5 flex items-center gap-2 border border-white/20 backdrop-blur-xl">
+          <div className="absolute bottom-4 left-4 blur-modern rounded-full px-3 py-1.5 flex items-center gap-2 border border-white/20 backdrop-blur-xl z-30">
             <Star className="w-4 h-4 fill-luxury-gold text-luxury-gold" />
             <span className="text-white font-bold text-sm">{car.rating}</span>
             <span className="text-white/60 text-xs">({car.reviews})</span>
@@ -112,13 +131,13 @@ export default function CarCard({ car }) {
 
           {/* View Details Overlay - Shows on Hover */}
           <motion.div
-            className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 flex items-center justify-center bg-black/70 backdrop-blur-md z-25"
             initial={{ opacity: 0 }}
             animate={{ opacity: isHovered ? 1 : 0 }}
             transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="flex items-center gap-2 text-white font-semibold text-lg"
+              className="flex items-center gap-2 text-white font-semibold text-lg shimmer"
               initial={{ y: 10, opacity: 0 }}
               animate={{
                 y: isHovered ? 0 : 10,

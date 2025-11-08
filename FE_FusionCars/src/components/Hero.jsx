@@ -4,18 +4,20 @@ import { ChevronRight, Search, ArrowRight, Star } from 'lucide-react';
 import { useState, useRef } from 'react';
 
 /**
- * Luxury Hero Component - PREMIUM REDESIGN
+ * Luxury Hero Component - ULTRA MODERN REDESIGN
  *
  * Cinematic luxury hero section featuring:
  * - Premium gold/platinum color scheme
  * - Sophisticated parallax animations
+ * - Optional video background support
  * - Playfair Display luxury typography
  * - Glass-morphism elements
  * - Elegant CTAs with gold accents
  * - Full-screen immersive experience
  * - Enhanced visual hierarchy
+ * - Advanced blur effects
  */
-export default function Hero() {
+export default function Hero({ videoBackground = null, enableVideo = false }) {
   const [searchQuery, setSearchQuery] = useState('');
   const ref = useRef(null);
 
@@ -69,11 +71,28 @@ export default function Hero() {
       aria-label="Luxury automotive collection - Fusion Cars"
       role="region"
     >
+      {/* Optional Video Background */}
+      {enableVideo && videoBackground && (
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-30"
+          >
+            <source src={videoBackground} type="video/mp4" />
+          </video>
+          {/* Video overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+        </div>
+      )}
+
       {/* Sophisticated animated background orbs */}
       <motion.div
         className="absolute top-20 right-20 w-96 h-96 rounded-full mix-blend-screen filter blur-3xl"
         style={{
-          background: 'radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%)',
           y
         }}
         animate={{
@@ -86,7 +105,7 @@ export default function Hero() {
       <motion.div
         className="absolute bottom-20 left-20 w-80 h-80 rounded-full mix-blend-screen filter blur-3xl"
         style={{
-          background: 'radial-gradient(circle, rgba(229, 193, 88, 0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(229, 193, 88, 0.12) 0%, transparent 70%)',
           y
         }}
         animate={{
@@ -99,7 +118,7 @@ export default function Hero() {
 
       {/* Grid pattern overlay */}
       <div
-        className="absolute inset-0 opacity-[0.015]"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: 'linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)',
           backgroundSize: '50px 50px'
@@ -143,10 +162,10 @@ export default function Hero() {
               </p>
             </motion.div>
 
-            {/* Premium Search Bar */}
+            {/* Premium Search Bar - Enhanced Blur */}
             <motion.div
               variants={itemVariants}
-              className="glass rounded-2xl p-2 flex flex-col sm:flex-row gap-3 shadow-luxury-lg backdrop-blur-xl"
+              className="blur-modern rounded-2xl p-2 flex flex-col sm:flex-row gap-3 shadow-luxury-lg"
             >
               <input
                 type="text"
@@ -160,7 +179,7 @@ export default function Hero() {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="btn-primary w-full sm:w-auto px-8 whitespace-nowrap flex items-center justify-center gap-2"
+                  className="btn-primary w-full sm:w-auto px-8 whitespace-nowrap flex items-center justify-center gap-2 gradient-border"
                   aria-label="Search our collection"
                 >
                   <Search className="w-5 h-5" />
