@@ -515,6 +515,7 @@ button:focus {
     font-weight: 900;
     position: relative;
     overflow: hidden;
+    z-index: 1;
   }
 
   .btn-primary::before {
@@ -524,6 +525,7 @@ button:focus {
     background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: -1;
   }
 
   .btn-primary:hover::before {
@@ -533,7 +535,23 @@ button:focus {
   .btn-primary:hover {
     box-shadow: 0 8px 32px rgba(212, 175, 55, 0.5), 0 4px 16px rgba(212, 175, 55, 0.3);
     transform: translateY(-3px);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #000000;
+    font-weight: 900;
+  }
+
+  .btn-primary:active {
+    color: #000000;
+    font-weight: 900;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Ensure button text is always visible */
+  .btn-primary span,
+  .btn-primary strong,
+  .btn-primary em {
+    position: relative;
+    z-index: 10;
   }
 
   .btn-secondary {
@@ -544,6 +562,7 @@ button:focus {
     font-weight: 700;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3), 0 2px 8px rgba(212, 175, 55, 0.2);
   }
 
   .btn-secondary::before {
@@ -563,7 +582,7 @@ button:focus {
 
   .btn-secondary:hover {
     color: #000000;
-    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.5), 0 4px 16px rgba(212, 175, 55, 0.3);
     font-weight: 900;
     border-color: var(--color-gold-light);
   }
@@ -578,6 +597,74 @@ button:focus {
   .btn-outline-white:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Secondary White Button with Fill Effect */
+  .btn-secondary-white {
+    @apply btn-luxury;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    color: white;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2), 0 2px 8px rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-secondary-white::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+  }
+
+  .btn-secondary-white:hover::before {
+    transform: scaleX(1);
+  }
+
+  .btn-secondary-white:hover {
+    color: #000000;
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.4), 0 4px 16px rgba(255, 255, 255, 0.2);
+    font-weight: 900;
+    border-color: white;
+  }
+
+  /* Secondary Silver Button with Fill Effect */
+  .btn-secondary-silver {
+    @apply btn-luxury;
+    background: transparent;
+    border: 2px solid #C0C0C0;
+    color: #C0C0C0;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(192, 192, 192, 0.3), 0 2px 8px rgba(192, 192, 192, 0.2);
+  }
+
+  .btn-secondary-silver::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #C0C0C0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+  }
+
+  .btn-secondary-silver:hover::before {
+    transform: scaleX(1);
+  }
+
+  .btn-secondary-silver:hover {
+    color: #000000;
+    box-shadow: 0 8px 32px rgba(192, 192, 192, 0.5), 0 4px 16px rgba(192, 192, 192, 0.3);
+    font-weight: 900;
+    border-color: #E0E0E0;
   }
 
   /* Premium Input Fields */

@@ -143,11 +143,11 @@ export default function Navbar() {
                 <motion.button
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="btn-primary px-6 py-3 flex items-center gap-2 text-sm group shadow-gold-glow"
+                  className="btn-secondary px-6 py-3 flex items-center gap-2 text-sm group shadow-gold-glow relative overflow-hidden"
                   aria-label="Schedule consultation"
                 >
-                  <span>Book Consultation</span>
-                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <span className="relative z-10">Book Consultation</span>
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
                 </motion.button>
               </Link>
 
@@ -231,11 +231,11 @@ export default function Navbar() {
                 >
                   <Link href="/contact">
                     <button
-                      className="btn-primary w-full text-lg py-4 flex items-center justify-center gap-2"
+                      className="btn-secondary w-full text-lg py-4 flex items-center justify-center gap-2 relative overflow-hidden"
                       onClick={() => setIsOpen(false)}
                     >
-                      <span>Schedule Consultation</span>
-                      <ChevronRight className="w-5 h-5" />
+                      <span className="relative z-10">Schedule Consultation</span>
+                      <ChevronRight className="w-5 h-5 relative z-10" />
                     </button>
                   </Link>
                 </motion.div>

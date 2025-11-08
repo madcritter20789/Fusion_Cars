@@ -177,13 +177,13 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
               />
               <Link href="/inventory">
                 <motion.button
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="btn-primary w-full sm:w-auto px-8 whitespace-nowrap flex items-center justify-center gap-2 gradient-border"
+                  className="btn-secondary w-full sm:w-auto px-8 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden"
                   aria-label="Search our collection"
                 >
-                  <Search className="w-5 h-5" />
-                  Explore Collection
+                  <Search className="w-5 h-5 relative z-10" />
+                  <span className="relative z-10">Explore Collection</span>
                 </motion.button>
               </Link>
             </motion.div>
@@ -209,10 +209,10 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
                 <motion.button
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn-outline-white w-full text-lg py-5"
+                  className="btn-secondary-white w-full text-lg py-5"
                   aria-label="Schedule private viewing"
                 >
-                  Book Consultation
+                  <span className="relative z-10">Book Consultation</span>
                 </motion.button>
               </Link>
             </motion.div>

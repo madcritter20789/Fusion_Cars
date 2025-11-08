@@ -131,13 +131,13 @@ export default function CarCard({ car }) {
 
           {/* View Details Overlay - Shows on Hover */}
           <motion.div
-            className="absolute inset-0 flex items-center justify-center bg-black/70 backdrop-blur-md z-25"
+            className="absolute inset-0 flex items-center justify-center bg-black/70 backdrop-blur-md z-40"
             initial={{ opacity: 0 }}
             animate={{ opacity: isHovered ? 1 : 0 }}
             transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="flex items-center gap-2 text-white font-semibold text-lg shimmer"
+              className="flex items-center gap-2 text-white font-semibold text-lg"
               initial={{ y: 10, opacity: 0 }}
               animate={{
                 y: isHovered ? 0 : 10,

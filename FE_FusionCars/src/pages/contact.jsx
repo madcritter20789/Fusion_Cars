@@ -352,12 +352,12 @@ export default function Contact() {
                 {/* Submit Button */}
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -3 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full bg-accent-silver text-primary-black py-3 rounded-lg font-bold text-lg hover:bg-neutral-light transition-all duration-300 shadow-md"
+                  className="btn-secondary-white w-full py-3 rounded-lg font-bold text-lg relative overflow-hidden"
                   aria-label="Send message"
                 >
-                  Send Message
+                  <span className="relative z-10">Send Message</span>
                 </motion.button>
               </form>
             </motion.div>

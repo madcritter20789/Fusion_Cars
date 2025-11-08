@@ -246,13 +246,13 @@ export default function Inventory() {
 
                 {/* Reset Button */}
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={resetFilters}
-                  className="w-full border-2 border-accent-silver text-accent-silver py-3 rounded-lg font-bold hover:bg-accent-silver hover:text-primary-black transition-all duration-300"
+                  className="w-full btn-secondary-silver py-3 rounded-lg font-bold relative overflow-hidden"
                   aria-label="Reset filters"
                 >
-                  Reset Filters
+                  <span className="relative z-10">Reset Filters</span>
                 </motion.button>
               </div>
             </motion.aside>
@@ -317,12 +317,12 @@ export default function Inventory() {
                 >
                   <p className="text-xl text-accent-stone mb-4">No vehicles match your criteria</p>
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={resetFilters}
-                    className="border-2 border-accent-silver text-accent-silver px-6 py-3 rounded-lg font-bold hover:bg-accent-silver hover:text-primary-black transition-all duration-300"
+                    className="btn-secondary-silver px-6 py-3 font-bold relative overflow-hidden"
                   >
-                    Clear Filters
+                    <span className="relative z-10">Clear Filters</span>
                   </motion.button>
                 </motion.div>
               )}

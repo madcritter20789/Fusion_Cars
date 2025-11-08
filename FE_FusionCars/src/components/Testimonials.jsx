@@ -153,12 +153,12 @@ export default function Testimonials() {
           <h3 className="text-2xl font-bold mb-4">Join Thousands of Satisfied Customers</h3>
           <p className="mb-6 text-accent-stone">Experience the Fusion Cars difference today</p>
           <motion.button
-            whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(209, 213, 219, 0.3)' }}
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-accent-silver text-primary-black px-8 py-3 rounded-lg font-semibold hover:bg-neutral-light transition-colors duration-300 shadow-lg"
+            className="btn-secondary px-8 py-3 text-lg relative overflow-hidden"
             aria-label="Book a test drive now"
           >
-            Book Test Drive Now
+            <span className="relative z-10">Book Test Drive Now</span>
           </motion.button>
         </motion.div>
       </div>

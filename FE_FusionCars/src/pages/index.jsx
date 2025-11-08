@@ -124,11 +124,11 @@ export default function Home() {
           >
             <Link href="/inventory">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-accent-silver text-primary-black px-8 py-4 rounded-lg font-semibold hover:bg-neutral-light transition-colors duration-300 shadow-lg"
+                className="btn-secondary-silver px-8 py-4 font-semibold relative overflow-hidden"
               >
-                View All Vehicles
+                <span className="relative z-10">View All Vehicles</span>
               </motion.button>
             </Link>
           </motion.div>
@@ -194,12 +194,12 @@ export default function Home() {
               Book a test drive today and experience the difference with Fusion Cars
             </p>
             <motion.button
-              whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(209, 213, 219, 0.3)' }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-accent-silver text-primary-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-neutral-light transition-colors duration-300 shadow-lg"
+              className="btn-secondary px-8 py-4 text-lg relative overflow-hidden"
               aria-label="Book a test drive"
             >
-              Schedule Test Drive
+              <span className="relative z-10">Schedule Test Drive</span>
             </motion.button>
           </motion.div>
         </div>
