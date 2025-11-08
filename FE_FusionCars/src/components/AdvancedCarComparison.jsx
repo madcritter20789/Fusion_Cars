@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Check, Download, Heart, BarChart3, Filter, ChevronDown } from 'lucide-react';
 import { API_ENDPOINTS } from '../config/api';
 import ComparisonCharts from './ComparisonCharts';
+import { getImageWithFallback, getThumbnailPlaceholder } from '../utils/placeholders';
 
 /**
  * Advanced Car Comparison Component
@@ -368,7 +369,7 @@ export default function AdvancedCarComparison({ initialCars = [] }) {
                       className="flex gap-4 p-4 bg-primary-charcoal rounded-lg hover:bg-accent-charcoal transition text-left border border-accent-charcoal hover:border-accent-gold"
                     >
                       <img
-                        src={car.image || 'https://via.placeholder.com/100'}
+                        src={getImageWithFallback(car.image, getThumbnailPlaceholder(96, 80))}
                         alt={car.name}
                         className="w-24 h-20 object-cover rounded"
                       />
@@ -436,7 +437,7 @@ function CarComparisonCard({ car, onRemove, isHighlighted }) {
       </button>
 
       <img
-        src={car.image || 'https://via.placeholder.com/400x300'}
+        src={getImageWithFallback(car.image, `https://lorempicsum.com/api/cars/400/300?random=${car._id}`)}
         alt={car.name}
         className="w-full h-48 object-cover"
       />

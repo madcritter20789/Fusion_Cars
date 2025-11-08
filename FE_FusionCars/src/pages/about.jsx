@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
 import { CheckCircle, Users, Trophy, Zap } from 'lucide-react';
+import { getImageWithFallback, getAvatarPlaceholder } from '../utils/placeholders';
 
 /**
  * About Page
@@ -97,7 +98,10 @@ export default function About() {
               viewport={{ once: true }}
             >
               <img
-                src="https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=500&h=400&fit=crop"
+                src={getImageWithFallback(
+                  'https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=500&h=400&fit=crop',
+                  'https://lorempicsum.com/api/cars/500/400?random=1'
+                )}
                 alt="Fusion Cars headquarters"
                 className="rounded-lg shadow-lg w-full"
                 loading="lazy"
@@ -261,7 +265,7 @@ export default function About() {
                 whileHover={{ y: -5 }}
               >
                 <img
-                  src={member.image}
+                  src={getImageWithFallback(member.image, getAvatarPlaceholder(300, 300, member.name))}
                   alt={member.name}
                   className="w-48 h-48 rounded-lg mx-auto mb-4 object-cover shadow-lg"
                   loading="lazy"

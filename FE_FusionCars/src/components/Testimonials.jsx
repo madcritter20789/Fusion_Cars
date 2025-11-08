@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
+import { getImageWithFallback, getAvatarPlaceholder } from '../utils/placeholders';
 
 /**
  * Testimonials Component
@@ -129,7 +130,7 @@ export default function Testimonials() {
               {/* Customer Info */}
               <div className="flex items-center gap-3">
                 <img
-                  src={testimonial.image}
+                  src={getImageWithFallback(testimonial.image, getAvatarPlaceholder(48, 48, testimonial.name))}
                   alt={testimonial.name}
                   className="w-12 h-12 rounded-full object-cover border border-accent-silver/30"
                   loading="lazy"

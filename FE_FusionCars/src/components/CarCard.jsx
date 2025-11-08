@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Heart, Gauge, Fuel, Calendar, Star, ArrowRight, Eye } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import { getImageWithFallback } from '../utils/placeholders';
 
 /**
  * Luxury CarCard Component - PREMIUM REDESIGN
@@ -14,6 +15,7 @@ import Link from 'next/link';
  * - Refined typography hierarchy
  * - Luxury badge system
  * - Smooth micro-interactions
+ * - Fallback placeholder images
  */
 export default function CarCard({ car }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -24,6 +26,12 @@ export default function CarCard({ car }) {
     e.stopPropagation();
     setIsFavorite(!isFavorite);
   };
+
+  // Get image with fallback placeholder
+  const carImage = getImageWithFallback(
+    car.image,
+    `https://lorempicsum.com/api/cars/400/300?random=${car.id}`
+  );
 
   return (
     <Link href={`/inventory/${car.id || '#'}`}>
@@ -52,7 +60,7 @@ export default function CarCard({ car }) {
           <motion.div
             className="absolute inset-0 blur-2xl scale-110 opacity-50"
             style={{
-              backgroundImage: `url(${car.image})`,
+              backgroundImage: `url(${carImage})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -64,7 +72,7 @@ export default function CarCard({ car }) {
 
           {/* Car Image */}
           <motion.img
-            src={car.image}
+            src={carImage}
             alt={`${car.brand} ${car.model} - Premium luxury vehicle`}
             className="relative w-full h-full object-cover z-10"
             animate={{

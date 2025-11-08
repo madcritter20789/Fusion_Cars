@@ -13,6 +13,7 @@ import {
   Play,
   Maximize2,
 } from 'lucide-react';
+import { getImageWithFallback, getGalleryPlaceholder } from '../utils/placeholders';
 
 /**
  * Car Image Gallery Component
@@ -28,6 +29,7 @@ import {
  * - Video carousel support
  * - Thumbnail grid view
  * - Responsive mobile design
+ * - Fallback placeholder images
  */
 
 export default function CarImageGallery({ car, images = [], videos = [] }) {
@@ -132,11 +134,14 @@ export default function CarImageGallery({ car, images = [], videos = [] }) {
         {/* Image Viewer */}
         <div className="relative bg-black aspect-video flex items-center justify-center overflow-hidden group">
           <motion.img
-            key={currentImage?.url}
+            key={currentImage?.url || `placeholder-${currentImageIndex}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            src={currentImage?.url}
+            src={getImageWithFallback(
+              currentImage?.url,
+              getGalleryPlaceholder(800, 600)
+            )}
             alt={currentImage?.type || 'Car image'}
             style={{ scale: zoomLevel, cursor: isPanning ? 'grabbing' : 'grab' }}
             className="max-w-full max-h-full object-contain"
@@ -314,7 +319,10 @@ export default function CarImageGallery({ car, images = [], videos = [] }) {
               }`}
             >
               <img
-                src={image.url}
+                src={getImageWithFallback(
+                  image.url,
+                  getGalleryPlaceholder(200, 150)
+                )}
                 alt={`Thumbnail ${index + 1}`}
                 className="w-full h-24 object-cover"
                 loading="lazy"

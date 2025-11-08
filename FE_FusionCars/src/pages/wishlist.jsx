@@ -7,6 +7,7 @@ import CarCard from '../components/CarCard';
 import { Heart, Trash2, Share2, Copy, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import cars from '../data/cars.json';
+import { getImageWithFallback } from '../utils/placeholders';
 
 /**
  * Wishlist Management Page
@@ -236,7 +237,7 @@ export default function Wishlist() {
                         />
                         <Link href={`/inventory/${car.id}`}>
                           <img
-                            src={car.image}
+                            src={getImageWithFallback(car.image, `https://lorempicsum.com/api/cars/400/300?random=${car.id}`)}
                             alt={`${car.brand} ${car.model}`}
                             className="w-48 h-40 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
                           />
