@@ -9,8 +9,15 @@ dotenv.config();
 // Initialize Express app
 const app = express();
 
-// Connect to MongoDB
-connectDB();
+// Connect to MongoDB and start server
+let dbConnected = false;
+connectDB().then(() => {
+  dbConnected = true;
+  console.log('✅ Database connection initialized');
+}).catch(err => {
+  console.error('❌ Database connection failed:', err.message);
+  // Continue anyway to allow graceful degradation
+});
 
 // CORS Configuration
 const corsOptions = {

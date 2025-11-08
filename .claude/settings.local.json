@@ -12,7 +12,10 @@
       "Bash(npm run build:*)",
       "Bash(nul)",
       "Bash(tree D:UtkarshFusion_CarsBE_FusionCarssrc /F 2)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(netstat:*)",
+      "Bash(taskkill:*)",
+      "Bash(mongod:*)"
     ],
     "deny": [],
     "ask": []

@@ -12,6 +12,7 @@ export const API_ENDPOINTS = {
   login: `${API_BASE_URL}/auth/login`,
   register: `${API_BASE_URL}/auth/register`,
   adminLogin: `${API_BASE_URL}/auth/admin/login`,
+  adminRegister: `${API_BASE_URL}/auth/admin/register`,
 
   // Cars
   cars: `${API_BASE_URL}/cars`,

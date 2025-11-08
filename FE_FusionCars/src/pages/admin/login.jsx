@@ -136,8 +136,14 @@ export default function AdminLogin() {
               </button>
             </form>
 
-            <div className="mt-6 text-center">
-              <a href="/" className="text-sm text-accent-stone hover:text-accent-silver transition">
+            <div className="mt-6 space-y-3 text-center">
+              <p className="text-sm text-accent-stone">
+                Don't have an admin account?{' '}
+                <a href="/admin/signup" className="text-accent-gold hover:text-accent-yellow transition font-medium">
+                  Sign up here
+                </a>
+              </p>
+              <a href="/" className="text-sm text-accent-stone hover:text-accent-silver transition block">
                 ← Back to Website
               </a>
             </div>
@@ -145,7 +151,7 @@ export default function AdminLogin() {
 
           <div className="mt-4 text-center text-xs text-accent-stone">
             <p>Demo Credentials (if seeded):</p>
-            <p>Email: admin@fusioncars.com | Password: admin123</p>
+            <p>Email: admin@test.com | Password: admin123</p>
           </div>
         </motion.div>
       </div>

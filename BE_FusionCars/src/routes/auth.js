@@ -149,10 +149,11 @@ router.post('/admin/login', async (req, res) => {
 // Admin Registration (Super Admin only - for initial setup)
 router.post('/admin/register', async (req, res) => {
   try {
-    const { name, email, phone, password, role, permissions, adminKey } = req.body;
+    const { name, email, phone, password, role, permissions, adminKey, adminRegistrationKey } = req.body;
 
     // Check admin key (simple security measure)
-    if (adminKey !== process.env.ADMIN_REGISTRATION_KEY) {
+    const key = adminRegistrationKey || adminKey;
+    if (key !== process.env.ADMIN_REGISTRATION_KEY) {
       return res.status(403).json({ error: 'Invalid admin registration key' });
     }
 
