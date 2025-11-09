@@ -19,7 +19,7 @@ export default function FeaturedShowcase({
   buttonLink = "/inventory"
 }) {
   return (
-    <section className="relative w-full h-[600px] md:h-[700px] overflow-hidden bg-black">
+    <section className="relative w-full h-[400px] md:h-[500px] overflow-hidden bg-black">
       {/* Featured Image */}
       <div className="absolute inset-0">
         <img
@@ -47,9 +47,9 @@ export default function FeaturedShowcase({
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
-              className="mb-6"
+              className="mb-3"
             >
-              <span className="inline-block px-4 py-2 rounded-full bg-white/10 text-white text-sm font-semibold uppercase tracking-wider border border-white/20">
+              <span className="inline-block px-3 py-1.5 rounded-full bg-white/10 text-white text-xs font-semibold uppercase tracking-wide border border-white/20">
                 Let's Start a Lease
               </span>
             </motion.div>
@@ -60,7 +60,7 @@ export default function FeaturedShowcase({
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
               viewport={{ once: true }}
-              className="text-5xl md:text-6xl lg:text-7xl font-serif text-white font-bold leading-tight mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-serif text-white font-bold leading-tight mb-4"
             >
               {subtitle}
             </motion.h2>
@@ -73,9 +73,9 @@ export default function FeaturedShowcase({
               viewport={{ once: true }}
             >
               <Link href={buttonLink}>
-                <button className="btn-secondary-white flex items-center gap-3 py-4 px-8 text-lg hover:scale-105 transition-transform">
+                <button className="btn-secondary-white flex items-center gap-2 py-2.5 px-6 text-sm hover:scale-105 transition-transform">
                   <span className="relative z-10">{buttonText}</span>
-                  <ChevronRight className="w-6 h-6 relative z-10" />
+                  <ChevronRight className="w-4 h-4 relative z-10" />
                 </button>
               </Link>
             </motion.div>

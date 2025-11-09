@@ -137,28 +137,28 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
           animate="visible"
         >
           {/* Left Content - Premium Copy */}
-          <div className="space-y-10">
+          <div className="space-y-6">
             {/* Luxury Badge */}
             <motion.div variants={itemVariants}>
-              <span className="premium-badge inline-flex items-center gap-2">
+              <span className="premium-badge inline-flex items-center gap-2 text-sm">
                 <Star className="w-3 h-3 fill-current" />
                 Premium Automotive Collection
               </span>
             </motion.div>
 
             {/* Cinematic Headline - New Design */}
-            <motion.div variants={itemVariants} className="space-y-6">
+            <motion.div variants={itemVariants} className="space-y-3">
               {/* Subheading */}
-              <p className="text-lg text-neutral-400 uppercase tracking-widest font-light">
+              <p className="text-sm text-neutral-400 uppercase tracking-wide font-light">
                 Welcome to the Dream Destination for Superstar Lovers.
               </p>
 
               {/* Main Heading */}
-              <h1 className="font-serif text-white leading-[1.1]" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, letterSpacing: '-0.02em' }}>
+              <h1 className="font-serif text-white leading-[1.1]" style={{ fontSize: 'clamp(1.8rem, 5vw, 3.5rem)', fontWeight: 700, letterSpacing: '-0.02em' }}>
                 Supercars for Superstars
               </h1>
 
-              <p className="text-lg text-neutral-300 leading-relaxed max-w-xl font-light">
+              <p className="text-base text-neutral-300 leading-relaxed max-w-xl font-light">
                 Curated collection of the world's finest automobiles. Where luxury meets performance, and every journey becomes unforgettable.
               </p>
             </motion.div>
@@ -173,17 +173,17 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
                 placeholder="Search by make, model, or type..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 px-6 py-4 rounded-xl bg-white/5 text-white placeholder-neutral-400 border border-white/10 focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition-all"
+                className="flex-1 px-4 py-2.5 rounded-lg bg-white/5 text-white placeholder-neutral-400 border border-white/10 focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition-all text-sm"
                 aria-label="Search luxury cars"
               />
               <Link href="/inventory" className="overflow-hidden">
                 <motion.button
                   whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn-secondary w-full sm:w-auto px-8 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden h-full"
+                  className="btn-secondary w-full sm:w-auto px-6 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden h-full text-sm"
                   aria-label="Search our collection"
                 >
-                  <Search className="w-5 h-5 relative z-10" />
+                  <Search className="w-4 h-4 relative z-10" />
                   <span className="relative z-10">Search</span>
                 </motion.button>
               </Link>
@@ -191,18 +191,18 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
 
             {/* Luxury CTA Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-5 pt-4"
+              className="flex flex-col sm:flex-row gap-3 pt-2"
               variants={itemVariants}
             >
               <Link href="/inventory" className="flex-1">
                 <motion.button
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn-primary w-full text-lg py-5 flex items-center justify-center gap-3 group"
+                  className="btn-primary w-full text-sm py-3 flex items-center justify-center gap-2 group"
                   aria-label="Browse premium vehicle collection"
                 >
                   View Inventory
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </motion.button>
               </Link>
 
@@ -210,7 +210,7 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
                 <motion.button
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn-secondary-white w-full text-lg py-5"
+                  className="btn-secondary-white w-full text-sm py-3"
                   aria-label="Schedule private viewing"
                 >
                   <span className="relative z-10">Book Consultation</span>
@@ -220,20 +220,20 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
 
             {/* Trust Indicators - Refined Metrics */}
             <motion.div
-              className="grid grid-cols-3 gap-8 pt-12 border-t border-white/10"
+              className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10"
               variants={itemVariants}
             >
               <div className="text-center lg:text-left">
-                <p className="text-4xl font-serif font-bold text-gradient-gold mb-2">500+</p>
-                <p className="text-sm text-neutral-400 uppercase tracking-wider">Curated Vehicles</p>
+                <p className="text-2xl font-serif font-bold text-gradient-gold mb-1">500+</p>
+                <p className="text-xs text-neutral-400 uppercase tracking-wider">Curated Vehicles</p>
               </div>
               <div className="text-center lg:text-left">
-                <p className="text-4xl font-serif font-bold text-gradient-platinum mb-2">15K+</p>
-                <p className="text-sm text-neutral-400 uppercase tracking-wider">Satisfied Clients</p>
+                <p className="text-2xl font-serif font-bold text-gradient-platinum mb-1">15K+</p>
+                <p className="text-xs text-neutral-400 uppercase tracking-wider">Satisfied Clients</p>
               </div>
               <div className="text-center lg:text-left">
-                <p className="text-4xl font-serif font-bold text-gradient-gold mb-2">25+</p>
-                <p className="text-sm text-neutral-400 uppercase tracking-wider">Years Excellence</p>
+                <p className="text-2xl font-serif font-bold text-gradient-gold mb-1">25+</p>
+                <p className="text-xs text-neutral-400 uppercase tracking-wider">Years Excellence</p>
               </div>
             </motion.div>
           </div>
