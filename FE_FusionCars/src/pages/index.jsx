@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 import Testimonials from '../components/Testimonials';
+import FeaturedShowcase from '../components/FeaturedShowcase';
+import RecentlyPosted from '../components/RecentlyPosted';
 import CarCard from '../components/CarCard';
 import cars from '../data/cars.json';
 import { motion } from 'framer-motion';
@@ -84,6 +86,18 @@ export default function Home() {
 
       {/* Hero Section */}
       <Hero />
+
+      {/* Recently Posted Cars - New Section */}
+      <RecentlyPosted />
+
+      {/* Featured Showcase - New Section */}
+      <FeaturedShowcase
+        title="Let's Start a Lease"
+        subtitle="We are the best when it comes to exotic cars."
+        image="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&h=700&fit=crop&q=90"
+        buttonText="Explore More"
+        buttonLink="/inventory"
+      />
 
       {/* Featured Cars Section */}
       <section className="py-16 bg-primary-black" aria-label="Featured vehicles">

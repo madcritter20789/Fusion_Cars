@@ -146,44 +146,52 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
               </span>
             </motion.div>
 
-            {/* Cinematic Headline */}
+            {/* Cinematic Headline - New Design */}
             <motion.div variants={itemVariants} className="space-y-6">
-              <h1 className="font-serif text-white leading-[0.95]" style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', fontWeight: 800, letterSpacing: '-0.03em' }}>
-                Exceptional Cars.
-                <br />
-                <span className="text-gradient-gold">
-                  Extraordinary
-                </span>{' '}
-                Experiences.
+              {/* Subheading */}
+              <p className="text-lg text-neutral-400 uppercase tracking-widest font-light">
+                Welcome to the Dream Destination for Superstar Lovers.
+              </p>
+
+              {/* Main Heading */}
+              <h1 className="font-serif text-white leading-[1.1]" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 700, letterSpacing: '-0.02em' }}>
+                Supercars for Superstars
               </h1>
 
-              <p className="text-xl text-neutral-300 leading-relaxed max-w-xl font-light">
+              <p className="text-lg text-neutral-300 leading-relaxed max-w-xl font-light">
                 Curated collection of the world's finest automobiles. Where luxury meets performance, and every journey becomes unforgettable.
               </p>
             </motion.div>
 
-            {/* Premium Search Bar - Enhanced Blur */}
+            {/* Premium Search Bar - New Minimalist Design */}
             <motion.div
               variants={itemVariants}
-              className="blur-modern rounded-2xl p-2 flex flex-col sm:flex-row gap-3 shadow-luxury-lg overflow-hidden"
+              className="flex flex-col sm:flex-row gap-4 items-center pt-4"
             >
-              <input
-                type="text"
-                placeholder="Search by make, model, or type..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 px-6 py-4 rounded-xl bg-white/5 text-white placeholder-neutral-400 border border-white/10 focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition-all"
-                aria-label="Search luxury cars"
-              />
-              <Link href="/inventory" className="overflow-hidden">
+              {/* Search Input */}
+              <div className="flex-1 w-full relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity blur-lg"></div>
+                <input
+                  type="text"
+                  placeholder="Search Your Dream Car Here..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="relative w-full px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder-neutral-500 focus:outline-none focus:border-luxury-gold focus:bg-white/10 transition-all"
+                  aria-label="Search luxury cars"
+                />
+                <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 pointer-events-none" />
+              </div>
+
+              {/* Discover Collection Button */}
+              <Link href="/inventory" className="w-full sm:w-auto">
                 <motion.button
-                  whileHover={{ scale: 1.02, y: -1 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="btn-secondary w-full sm:w-auto px-8 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden h-full"
-                  aria-label="Search our collection"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-black font-semibold flex items-center justify-center gap-2 hover:bg-neutral-100 transition-all shadow-lg"
+                  aria-label="Discover our collection"
                 >
-                  <Search className="w-5 h-5 relative z-10" />
-                  <span className="relative z-10">Search</span>
+                  <span>Discover Collection</span>
+                  <ChevronRight className="w-5 h-5" />
                 </motion.button>
               </Link>
             </motion.div>

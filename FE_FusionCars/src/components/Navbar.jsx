@@ -32,7 +32,6 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
     { name: 'Collection', href: '/inventory' },
     { name: 'Compare', href: '/advanced-compare' },
     { name: 'Financing', href: '/financing-calculator' },
@@ -40,6 +39,29 @@ export default function Navbar() {
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ];
+
+  const menuCategories = [
+    { name: 'Explore Collection', href: '/inventory' },
+    { name: 'Modification & Upgrade', href: '/inventory' },
+    { name: 'Car Detailing', href: '/about' },
+    { name: 'Car Servicing', href: '/about' },
+    { name: 'Sell Car', href: '/contact' },
+  ];
+
+  const footerLinks = {
+    company: [
+      { name: 'Our Showrooms', href: '/about' },
+      { name: 'About Us', href: '/about' },
+      { name: 'Wallpapers', href: '/gallery' },
+      { name: 'Contact Us', href: '/contact' },
+    ],
+    info: [
+      { name: 'Why Us', href: '/about' },
+      { name: 'The Team', href: '/about' },
+      { name: 'Career', href: '/about' },
+      { name: 'BBT Squad', href: '/about' },
+    ],
+  };
 
   return (
     <>
@@ -187,79 +209,108 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Luxury Mobile Menu */}
+        {/* Fullscreen Luxury Mobile Menu - New Design */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
               id="mobile-menu"
-              className="lg:hidden overflow-hidden glass-dark border-t border-white/10"
+              className="lg:hidden fixed inset-0 bg-black/95 backdrop-blur-xl z-40 overflow-y-auto"
+              style={{ top: '100%' }}
             >
-              <div className="luxury-container py-8 space-y-6">
-                {/* Mobile Nav Links */}
-                <div className="space-y-4">
-                  {navLinks.map((link, index) => (
+              <div className="min-h-screen flex flex-col p-8">
+                {/* Close button at top right */}
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="absolute top-8 right-8 text-white hover:text-luxury-gold transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X className="w-8 h-8" />
+                </button>
+
+                {/* Main Menu Categories */}
+                <div className="flex-1 space-y-8 py-16">
+                  {menuCategories.map((category, index) => (
                     <motion.div
-                      key={link.name}
-                      initial={{ opacity: 0, x: -20 }}
+                      key={category.name}
+                      initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
                     >
                       <Link
-                        href={link.href}
-                        className="block py-3 text-white hover:text-luxury-gold transition-colors font-medium text-lg border-b border-white/5 hover:border-luxury-gold/30"
+                        href={category.href}
                         onClick={() => setIsOpen(false)}
+                        className="block group"
                       >
-                        <div className="flex items-center justify-between">
-                          <span>{link.name}</span>
-                          <ChevronRight className="w-5 h-5 opacity-50" />
+                        <div className="flex items-center justify-between gap-4">
+                          <h2 className="text-4xl md:text-5xl font-serif text-white group-hover:text-luxury-gold transition-colors duration-300">
+                            {category.name}
+                          </h2>
+                          <ChevronRight className="w-8 h-8 text-white/50 group-hover:text-luxury-gold group-hover:translate-x-2 transition-all duration-300 flex-shrink-0" />
                         </div>
                       </Link>
                     </motion.div>
                   ))}
                 </div>
 
-                {/* Mobile CTA */}
+                {/* Footer Links - Two Columns */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="pt-4"
+                  transition={{ delay: 0.5 }}
+                  className="grid grid-cols-2 gap-8 pt-12 border-t border-white/10 mt-auto"
                 >
-                  <Link href="/contact">
-                    <button
-                      className="btn-secondary w-full text-lg py-4 flex items-center justify-center gap-2 relative overflow-hidden"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <span className="relative z-10">Schedule Consultation</span>
-                      <ChevronRight className="w-5 h-5 relative z-10" />
-                    </button>
-                  </Link>
+                  {/* Company Links */}
+                  <div className="space-y-3">
+                    {footerLinks.company.map((link) => (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className="block text-sm text-neutral-400 hover:text-luxury-gold transition-colors"
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
+                  </div>
+
+                  {/* Info Links */}
+                  <div className="space-y-3">
+                    {footerLinks.info.map((link) => (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className="block text-sm text-neutral-400 hover:text-luxury-gold transition-colors"
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
+                  </div>
                 </motion.div>
 
-                {/* Mobile Contact Info */}
+                {/* Contact Info at bottom */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="pt-6 border-t border-white/10 space-y-3"
+                  transition={{ delay: 0.6 }}
+                  className="flex gap-6 pt-8 border-t border-white/10 mt-8 text-sm"
                 >
                   <a
                     href="tel:+915551234567"
-                    className="flex items-center gap-3 text-neutral-300 hover:text-luxury-gold transition-colors"
+                    className="text-neutral-400 hover:text-luxury-gold transition-colors"
                   >
-                    <Phone className="w-5 h-5" />
-                    <span>+91 (555) 123-4567</span>
+                    +91 (555) 123-4567
                   </a>
+                  <span className="text-white/20">•</span>
                   <a
                     href="mailto:info@fusioncars.in"
-                    className="flex items-center gap-3 text-neutral-300 hover:text-luxury-gold transition-colors"
+                    className="text-neutral-400 hover:text-luxury-gold transition-colors"
                   >
-                    <Mail className="w-5 h-5" />
-                    <span>info@fusioncars.in</span>
+                    info@fusioncars.in
                   </a>
                 </motion.div>
               </div>

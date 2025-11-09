@@ -18,30 +18,30 @@ export default function Footer() {
 
   const footerSections = [
     {
-      title: 'Quick Links',
+      title: 'Our Showrooms',
       links: [
-        { name: 'Home', href: '/' },
-        { name: 'Inventory', href: '/inventory' },
         { name: 'About Us', href: '/about' },
-        { name: 'Contact', href: '/contact' },
+        { name: 'Wallpapers', href: '/gallery' },
+        { name: 'Contact Us', href: '/contact' },
+        { name: 'Gallery', href: '/gallery' },
+      ],
+    },
+    {
+      title: 'Why Us',
+      links: [
+        { name: 'The Team', href: '/about' },
+        { name: 'Career', href: '/about' },
+        { name: 'BBT Squad', href: '/about' },
+        { name: 'Premium Service', href: '/about' },
       ],
     },
     {
       title: 'Services',
       links: [
-        { name: 'Test Drive', href: '#' },
-        { name: 'Trade-In', href: '#' },
-        { name: 'Financing', href: '#' },
-        { name: 'Warranty', href: '#' },
-      ],
-    },
-    {
-      title: 'Company',
-      links: [
-        { name: 'About', href: '/about' },
-        { name: 'Careers', href: '#' },
-        { name: 'Blog', href: '#' },
-        { name: 'Press', href: '#' },
+        { name: 'Explore Collection', href: '/inventory' },
+        { name: 'Car Financing', href: '/financing-calculator' },
+        { name: 'Car Comparison', href: '/advanced-compare' },
+        { name: 'Wishlist', href: '/wishlist' },
       ],
     },
   ];
