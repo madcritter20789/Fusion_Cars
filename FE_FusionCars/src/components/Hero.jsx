@@ -202,14 +202,27 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
                   </button>
                 )}
               </div>
+              {/* Hidden Mobile Search Button */}
               <motion.button
                 onClick={handleSearch}
+                className="hidden sm:flex sm:w-auto btn-secondary px-6 whitespace-nowrap items-center justify-center gap-2 relative overflow-hidden h-full text-sm"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
-                className="btn-secondary w-full sm:w-auto px-6 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden h-full text-sm"
                 aria-label="Discover our collection"
               >
                 <span className="relative z-10">Discover Collection</span>
+              </motion.button>
+
+              {/* Mobile-only Search Button */}
+              <motion.button
+                onClick={handleSearch}
+                className="sm:hidden w-full btn-secondary px-6 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden h-full text-sm"
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                aria-label="Search luxury cars"
+              >
+                <Search className="w-4 h-4" />
+                <span className="relative z-10">Search</span>
               </motion.button>
             </motion.div>
 

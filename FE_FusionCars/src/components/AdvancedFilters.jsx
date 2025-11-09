@@ -34,6 +34,7 @@ export default function AdvancedFilters({
     transmission: false,
     year: false,
     rating: false,
+    search: true,
   });
 
   const toggleSection = (section) => {
@@ -108,14 +109,44 @@ export default function AdvancedFilters({
 
         <div className="space-y-4">
           {/* Search */}
-          <FilterSection title="Search" isExpanded={true}>
-            <input
-              type="text"
-              placeholder="Car name or brand..."
-              value={filters.search || ''}
-              onChange={(e) => onFilterChange('search', e.target.value)}
-              className="w-full px-4 py-2 bg-primary-charcoal border border-accent-charcoal rounded-lg text-white placeholder-accent-stone focus:border-accent-gold outline-none transition"
-            />
+          <FilterSection
+            title="Search"
+            isExpanded={expandedSection.search}
+            onToggle={() => toggleSection('search')}
+          >
+            <div className="space-y-3">
+              <input
+                type="text"
+                placeholder="Car name or brand..."
+                value={filters.search || ''}
+                onChange={(e) => onFilterChange('search', e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    // Trigger filter update on Enter
+                    e.preventDefault();
+                  }
+                }}
+                className="w-full px-4 py-2 bg-primary-charcoal border border-accent-charcoal rounded-lg text-white placeholder-accent-stone focus:border-accent-gold outline-none transition"
+              />
+              {/* Mobile-only Search Button */}
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="md:hidden w-full px-4 py-2 bg-accent-gold text-primary-black rounded-lg font-semibold hover:bg-accent-gold/90 transition flex items-center justify-center gap-2"
+                onClick={() => {
+                  // Trigger filter update and close mobile panel
+                  onFilterChange('search', filters.search);
+                  if (showMobile && onClose) {
+                    // Optional: Auto-close on search in mobile
+                    // onClose();
+                  }
+                }}
+                aria-label="Apply search filter"
+              >
+                <Search size={18} />
+                <span>Apply Search</span>
+              </motion.button>
+            </div>
           </FilterSection>
 
           {/* Brand Filter */}
