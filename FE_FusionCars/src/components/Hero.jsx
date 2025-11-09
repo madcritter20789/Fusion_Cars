@@ -163,35 +163,28 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
               </p>
             </motion.div>
 
-            {/* Premium Search Bar - New Minimalist Design */}
+            {/* Premium Search Bar - Previous Style */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 items-center pt-4"
+              className="blur-modern rounded-2xl p-2 flex flex-col sm:flex-row gap-3 shadow-luxury-lg overflow-hidden"
             >
-              {/* Search Input */}
-              <div className="flex-1 w-full relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity blur-lg"></div>
-                <input
-                  type="text"
-                  placeholder="Search Your Dream Car Here..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="relative w-full px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder-neutral-500 focus:outline-none focus:border-luxury-gold focus:bg-white/10 transition-all"
-                  aria-label="Search luxury cars"
-                />
-                <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 pointer-events-none" />
-              </div>
-
-              {/* Discover Collection Button */}
-              <Link href="/inventory" className="w-full sm:w-auto">
+              <input
+                type="text"
+                placeholder="Search by make, model, or type..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 px-6 py-4 rounded-xl bg-white/5 text-white placeholder-neutral-400 border border-white/10 focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition-all"
+                aria-label="Search luxury cars"
+              />
+              <Link href="/inventory" className="overflow-hidden">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-black font-semibold flex items-center justify-center gap-2 hover:bg-neutral-100 transition-all shadow-lg"
-                  aria-label="Discover our collection"
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="btn-secondary w-full sm:w-auto px-8 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden h-full"
+                  aria-label="Search our collection"
                 >
-                  <span>Discover Collection</span>
-                  <ChevronRight className="w-5 h-5" />
+                  <Search className="w-5 h-5 relative z-10" />
+                  <span className="relative z-10">Search</span>
                 </motion.button>
               </Link>
             </motion.div>
