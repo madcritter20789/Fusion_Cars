@@ -30,6 +30,14 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
     }
   };
 
+  const handleDiscoverCollection = () => {
+    if (searchQuery.trim()) {
+      router.push(`/inventory?search=${encodeURIComponent(searchQuery)}`);
+    } else {
+      router.push('/inventory');
+    }
+  };
+
   const handleClearSearch = () => {
     setSearchQuery('');
   };
@@ -202,9 +210,9 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
                   </button>
                 )}
               </div>
-              {/* Hidden Mobile Search Button */}
+              {/* Desktop Search Button */}
               <motion.button
-                onClick={handleSearch}
+                onClick={handleDiscoverCollection}
                 className="hidden sm:flex sm:w-auto btn-secondary px-6 whitespace-nowrap items-center justify-center gap-2 relative overflow-hidden h-full text-sm"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
@@ -215,7 +223,7 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
 
               {/* Mobile-only Search Button */}
               <motion.button
-                onClick={handleSearch}
+                onClick={handleDiscoverCollection}
                 className="sm:hidden w-full btn-secondary px-6 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden h-full text-sm"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
