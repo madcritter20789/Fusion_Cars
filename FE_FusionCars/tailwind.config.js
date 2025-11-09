@@ -79,14 +79,14 @@ module.exports = {
       },
 
       fontFamily: {
-        // Luxury serif for headings
-        serif: ['Playfair Display', 'Cormorant Garamond', 'Georgia', 'serif'],
-        // Premium sans-serif for body
-        sans: ['Inter', 'Poppins', 'system-ui', 'sans-serif'],
-        // Elegant display font
-        display: ['Montserrat', 'Raleway', 'sans-serif'],
+        // Elegant luxury serif for headings
+        serif: ['Playfair Display', 'Georgia', 'serif'],
+        // Clean modern sans-serif for body
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        // Display font same as serif for consistency
+        display: ['Playfair Display', 'serif'],
         // Refined body text
-        body: ['Inter', 'Lato', 'sans-serif'],
+        body: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
 
       fontSize: {
