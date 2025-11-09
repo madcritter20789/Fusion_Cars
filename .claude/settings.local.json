@@ -27,7 +27,9 @@
       "Bash(git commit:*)",
       "Bash(tree /F /A \"D:\\Utkarsh\\Fusion_Cars\\BE_FusionCars\\src\")",
       "Bash(tree:*)",
-      "Bash(\"D:\\Utkarsh\\Fusion_Cars\\ARCHITECTURE_ANALYSIS.md\")"
+      "Bash(\"D:\\Utkarsh\\Fusion_Cars\\ARCHITECTURE_ANALYSIS.md\")",
+      "WebSearch",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

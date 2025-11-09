@@ -55,7 +55,7 @@ export default function CarCard({ car }) {
         aria-label={`${car.brand} ${car.model} - ${car.priceInWords}`}
       >
         {/* Premium Image Container */}
-        <div className="relative h-64 overflow-hidden bg-gradient-to-br from-neutral-900 to-black">
+        <div className="relative h-56 overflow-hidden bg-gradient-to-br from-neutral-900 to-black">
           {/* Car Image with Modern Blur Background */}
           <motion.div
             className="absolute inset-0 blur-2xl scale-110 opacity-50"
@@ -161,41 +161,45 @@ export default function CarCard({ car }) {
         </div>
 
         {/* Content Section */}
-        <div className="p-6 flex flex-col flex-grow bg-gradient-to-b from-primary-dark to-primary-black">
+        <div className="p-4 flex flex-col flex-grow bg-gradient-to-b from-primary-dark to-primary-black">
           {/* Brand & Price Row */}
-          <div className="flex items-start justify-between mb-4">
+          <div className="flex items-start justify-between mb-1.5">
             <div className="flex-1">
-              <p className="text-luxury-gold font-semibold text-xs uppercase tracking-widest mb-2">
+              <p className="text-luxury-gold font-semibold text-xs uppercase tracking-widest mb-0.5">
                 {car.brand}
               </p>
-              <h3 className="text-2xl font-serif font-bold text-white mb-1 leading-tight group-hover:text-luxury-gold transition-colors">
+              <h3 className="text-xl font-serif font-bold text-white leading-tight group-hover:text-luxury-gold transition-colors">
                 {car.model}
               </h3>
-              <p className="text-neutral-400 text-sm flex items-center gap-2">
-                <Calendar className="w-3.5 h-3.5" />
-                {car.year} Model
-              </p>
             </div>
 
             {/* Price Badge */}
             <div className="text-right">
-              <p className="text-luxury-gold text-2xl font-bold font-serif">
+              <p className="text-luxury-gold text-xl font-bold font-serif">
                 ₹{car.priceInWords}
-              </p>
-              <p className="text-neutral-500 text-xs uppercase tracking-wide">
-                Starting Price
               </p>
             </div>
           </div>
 
+          {/* Year and Starting Price - Compact */}
+          <div className="flex items-center justify-between text-xs mb-1.5">
+            <p className="text-neutral-400 flex items-center gap-1">
+              <Calendar className="w-3 h-3" />
+              {car.year} Model
+            </p>
+            <p className="text-neutral-500 uppercase tracking-wide">
+              Starting Price
+            </p>
+          </div>
+
           {/* Luxury Divider */}
-          <div className="luxury-divider my-4"></div>
+          <div className="luxury-divider my-1"></div>
 
           {/* Key Specifications - Premium Grid */}
-          <div className="grid grid-cols-3 gap-3 mb-5">
+          <div className="grid grid-cols-3 gap-2 mb-3">
             {/* Fuel Type */}
-            <div className="glass-light rounded-lg p-3 text-center border border-white/5 hover:border-luxury-gold/30 transition-colors">
-              <Fuel className="w-5 h-5 text-luxury-gold mx-auto mb-2" />
+            <div className="glass-light rounded-lg p-2 text-center border border-white/5 hover:border-luxury-gold/30 transition-colors">
+              <Fuel className="w-4 h-4 text-luxury-gold mx-auto mb-1" />
               <p className="text-xs font-semibold text-white mb-0.5">
                 {car.fuelType}
               </p>
@@ -205,8 +209,8 @@ export default function CarCard({ car }) {
             </div>
 
             {/* Transmission */}
-            <div className="glass-light rounded-lg p-3 text-center border border-white/5 hover:border-luxury-gold/30 transition-colors">
-              <Gauge className="w-5 h-5 text-luxury-platinum mx-auto mb-2" />
+            <div className="glass-light rounded-lg p-2 text-center border border-white/5 hover:border-luxury-gold/30 transition-colors">
+              <Gauge className="w-4 h-4 text-luxury-platinum mx-auto mb-1" />
               <p className="text-xs font-semibold text-white mb-0.5">
                 {car.transmission}
               </p>
@@ -216,8 +220,8 @@ export default function CarCard({ car }) {
             </div>
 
             {/* Mileage */}
-            <div className="glass-light rounded-lg p-3 text-center border border-white/5 hover:border-luxury-gold/30 transition-colors">
-              <Gauge className="w-5 h-5 text-luxury-silver mx-auto mb-2" />
+            <div className="glass-light rounded-lg p-2 text-center border border-white/5 hover:border-luxury-gold/30 transition-colors">
+              <Gauge className="w-4 h-4 text-luxury-silver mx-auto mb-1" />
               <p className="text-xs font-semibold text-white mb-0.5">
                 {car.mileage}
               </p>
@@ -229,21 +233,21 @@ export default function CarCard({ car }) {
 
           {/* Premium Features */}
           {car.features && car.features.length > 0 && (
-            <div className="mb-5">
-              <p className="text-xs font-bold text-neutral-400 mb-3 uppercase tracking-widest">
+            <div className="mb-3">
+              <p className="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-widest">
                 Highlights
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1">
                 {car.features.slice(0, 2).map((feature, index) => (
                   <span
                     key={index}
-                    className="glass-light text-white px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 hover:border-luxury-gold/50 transition-colors"
+                    className="glass-light text-white px-2 py-1 rounded-full text-xs font-medium border border-white/10 hover:border-luxury-gold/50 transition-colors"
                   >
                     {feature}
                   </span>
                 ))}
                 {car.features.length > 2 && (
-                  <span className="text-xs text-luxury-gold font-semibold px-3 py-1.5 flex items-center gap-1">
+                  <span className="text-xs text-luxury-gold font-semibold px-2 py-1 flex items-center gap-1">
                     <span>+{car.features.length - 2} more</span>
                   </span>
                 )}
@@ -251,24 +255,24 @@ export default function CarCard({ car }) {
             </div>
           )}
 
-          {/* Premium Action Buttons */}
-          <div className="flex flex-col gap-2.5 mt-auto pt-4 border-t border-white/5 w-full">
+          {/* Premium Action Buttons - Single Line */}
+          <div className="flex gap-2 mt-auto pt-2 border-t border-white/5 w-full">
             <motion.button
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full btn-primary py-3 px-4 text-sm sm:text-base font-bold flex items-center justify-center gap-2 group/btn whitespace-nowrap overflow-hidden text-ellipsis"
+              className="flex-1 btn-primary py-2 px-3 text-xs font-bold flex items-center justify-center gap-1 group/btn whitespace-nowrap overflow-hidden text-ellipsis"
               onClick={(e) => e.preventDefault()}
               aria-label={`View details for ${car.brand} ${car.model}`}
               title="View Details"
             >
-              <span className="whitespace-nowrap overflow-hidden text-ellipsis flex-1">View Details</span>
-              <ArrowRight className="w-4 h-4 flex-shrink-0 group-hover/btn:translate-x-1 transition-transform" />
+              <span className="whitespace-nowrap overflow-hidden text-ellipsis">View Details</span>
+              <ArrowRight className="w-3 h-3 flex-shrink-0 group-hover/btn:translate-x-1 transition-transform" />
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full btn-secondary py-3 px-4 text-sm sm:text-base font-bold whitespace-nowrap overflow-hidden text-ellipsis"
+              className="flex-1 btn-secondary py-2 px-3 text-xs font-bold whitespace-nowrap overflow-hidden text-ellipsis"
               onClick={(e) => e.preventDefault()}
               aria-label={`Schedule test drive for ${car.brand} ${car.model}`}
               title="Book Test Drive"

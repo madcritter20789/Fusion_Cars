@@ -187,9 +187,9 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
             {/* Premium Search Bar - With Icon Toggle */}
             <motion.div
               variants={itemVariants}
-              className="blur-modern rounded-2xl p-2 flex flex-col sm:flex-row gap-3 shadow-luxury-lg overflow-hidden"
+              className="blur-modern rounded-2xl p-0 flex flex-col sm:flex-row gap-0 shadow-luxury-lg overflow-hidden"
             >
-              <div className="flex-1 relative flex items-center">
+              <div className="flex-1 relative flex items-center px-2 py-2">
                 <Search className="absolute left-4 w-4 h-4 text-neutral-400 pointer-events-none" />
                 <input
                   type="text"
@@ -197,7 +197,7 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSearch(e)}
-                  className="flex-1 pl-10 pr-4 py-2.5 rounded-lg bg-white/5 text-white placeholder-neutral-400 border border-white/10 focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition-all text-sm"
+                  className="flex-1 pl-10 pr-4 py-3 rounded-lg bg-white/5 text-white placeholder-neutral-400 border border-white/10 focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition-all text-sm"
                   aria-label="Search luxury cars"
                 />
                 {searchQuery && (
@@ -213,7 +213,7 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
               {/* Desktop Search Button */}
               <motion.button
                 onClick={handleDiscoverCollection}
-                className="hidden sm:flex sm:w-auto btn-secondary px-6 whitespace-nowrap items-center justify-center gap-2 relative overflow-hidden h-full text-sm"
+                className="hidden sm:flex sm:w-auto btn-secondary px-6 whitespace-nowrap items-center justify-center gap-2 relative overflow-hidden py-3 text-sm"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
                 aria-label="Discover our collection"
@@ -224,7 +224,7 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
               {/* Mobile-only Search Button */}
               <motion.button
                 onClick={handleDiscoverCollection}
-                className="sm:hidden w-full btn-secondary px-6 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden h-full text-sm"
+                className="sm:hidden w-full btn-secondary px-6 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden py-3 text-sm"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
                 aria-label="Search luxury cars"

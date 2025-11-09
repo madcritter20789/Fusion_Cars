@@ -70,13 +70,13 @@ export default function CarDetail() {
 
       <Navbar />
 
-      <div className="min-h-screen bg-primary-black py-12">
+      <div className="min-h-screen bg-primary-black py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex items-center gap-2 text-accent-stone mb-8"
+            className="flex items-center gap-2 text-accent-stone text-sm mb-6"
           >
             <button
               onClick={() => router.push('/inventory')}
@@ -88,111 +88,181 @@ export default function CarDetail() {
             <span className="text-accent-gold">{car.brand} {car.model}</span>
           </motion.div>
 
-          {/* Header Section */}
+          {/* Hero Section - Full Width Gallery with Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12"
+            className="mb-8 sm:mb-12"
           >
-            {/* Left: Gallery */}
-            <div className="lg:col-span-2">
+            {/* Main Gallery */}
+            <div className="mb-6">
               <CarImageGallery car={car} />
             </div>
+          </motion.div>
 
-            {/* Right: Quick Info */}
-            <div className="space-y-6">
-              {/* Title & Price */}
+          {/* Header Section - Compact Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 sm:mb-12"
+          >
+            {/* Left: Car Title & Quick Specs */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Title & Price Card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal"
+                className="bg-primary-dark rounded-2xl p-6 sm:p-8 border border-accent-charcoal/50"
               >
-                <p className="text-accent-gold text-sm uppercase tracking-widest mb-2">
-                  {car.brand}
-                </p>
-                <h1 className="text-3xl font-bold text-white mb-1">{car.model}</h1>
-                <p className="text-accent-stone mb-4">{car.year} Model</p>
-
-                <div className="border-t border-accent-charcoal pt-4 mb-4">
-                  <p className="text-accent-stone text-sm mb-1">Price</p>
-                  <p className="text-3xl font-bold text-accent-gold">₹{car.priceInWords}</p>
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <div>
+                    <p className="text-accent-gold text-xs uppercase tracking-widest mb-2 font-semibold">
+                      {car.brand}
+                    </p>
+                    <h1 className="text-3xl sm:text-4xl font-serif font-bold text-white">
+                      {car.model}
+                    </h1>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-accent-stone text-xs uppercase tracking-wide mb-1">Price</p>
+                    <p className="text-3xl sm:text-4xl font-bold text-accent-gold">
+                      ₹{car.priceInWords}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="space-y-3">
-                  <button
+                <p className="text-accent-stone text-sm mb-6">{car.year} Model • {car.bodyType || 'Premium Sedan'}</p>
+
+                {/* Quick Stats Grid */}
+                <div className="grid grid-cols-4 gap-3 mb-6 py-4 border-y border-accent-charcoal/50">
+                  <div className="text-center">
+                    <p className="text-accent-stone text-xs uppercase mb-1">Fuel</p>
+                    <p className="text-white font-semibold text-sm">{car.fuelType}</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-accent-stone text-xs uppercase mb-1">Trans</p>
+                    <p className="text-white font-semibold text-sm">{car.transmission}</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-accent-stone text-xs uppercase mb-1">KMPL</p>
+                    <p className="text-white font-semibold text-sm">{car.mileage}</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-accent-stone text-xs uppercase mb-1">Rating</p>
+                    <p className="text-accent-gold font-semibold text-sm">⭐ {car.rating}</p>
+                  </div>
+                </div>
+
+                {/* Action Buttons - Grid Layout */}
+                <div className="grid grid-cols-2 gap-3">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={() => setIsFavorite(!isFavorite)}
-                    className={`w-full py-3 px-4 rounded-lg font-bold transition flex items-center justify-center gap-2 ${
+                    className={`py-3 px-4 rounded-xl font-bold transition flex items-center justify-center gap-2 text-sm ${
                       isFavorite
                         ? 'bg-accent-gold/20 text-accent-gold border border-accent-gold'
                         : 'bg-accent-gold text-primary-black hover:bg-yellow-500'
                     }`}
                   >
-                    <Heart size={20} fill={isFavorite ? 'currentColor' : 'none'} />
-                    {isFavorite ? 'Added to Wishlist' : 'Add to Wishlist'}
-                  </button>
+                    <Heart size={18} fill={isFavorite ? 'currentColor' : 'none'} />
+                    <span>{isFavorite ? 'Wishlisted' : 'Wishlist'}</span>
+                  </motion.button>
 
-                  <button className="w-full py-3 px-4 bg-primary-charcoal border border-accent-gold text-accent-gold rounded-lg font-bold hover:bg-accent-gold/10 transition">
-                    Book Test Drive
-                  </button>
-
-                  <button
-                    onClick={() => setShowComparison(true)}
-                    className="w-full py-3 px-4 bg-primary-charcoal border border-accent-charcoal text-accent-platinum rounded-lg font-bold hover:border-accent-gold transition flex items-center justify-center gap-2"
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="py-3 px-4 bg-primary-charcoal border border-accent-gold text-accent-gold rounded-xl font-bold hover:bg-accent-gold/10 transition text-sm"
                   >
-                    <Sliders size={20} />
-                    Compare Cars
-                  </button>
+                    Test Drive
+                  </motion.button>
 
-                  <button className="w-full py-3 px-4 bg-primary-charcoal border border-accent-charcoal text-accent-platinum rounded-lg font-bold hover:border-accent-gold transition flex items-center justify-center gap-2">
-                    <Share2 size={20} />
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => setShowComparison(true)}
+                    className="py-3 px-4 bg-primary-charcoal border border-accent-charcoal text-accent-stone rounded-xl font-bold hover:border-accent-gold hover:text-accent-gold transition flex items-center justify-center gap-2 text-sm"
+                  >
+                    <Sliders size={16} />
+                    Compare
+                  </motion.button>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="py-3 px-4 bg-primary-charcoal border border-accent-charcoal text-accent-stone rounded-xl font-bold hover:border-accent-gold hover:text-accent-gold transition flex items-center justify-center gap-2 text-sm"
+                  >
+                    <Share2 size={16} />
                     Share
-                  </button>
+                  </motion.button>
                 </div>
               </motion.div>
+            </div>
 
+            {/* Right: Contact & Features */}
+            <div className="space-y-6">
               {/* Contact Card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal"
+                className="bg-gradient-to-br from-accent-gold/10 to-accent-gold/5 rounded-2xl p-6 border border-accent-gold/30"
               >
-                <h3 className="text-white font-bold mb-4">Contact Us</h3>
+                <h3 className="text-white font-bold mb-4 text-lg">Get In Touch</h3>
                 <div className="space-y-3">
                   <a
                     href="tel:+919876543210"
-                    className="flex items-center gap-3 text-accent-stone hover:text-accent-gold transition"
+                    className="flex items-center gap-3 text-accent-stone hover:text-accent-gold transition group"
                   >
-                    <Phone size={20} />
-                    <span>+91 98765 43210</span>
+                    <div className="p-2.5 bg-accent-gold/20 rounded-lg group-hover:bg-accent-gold/30 transition">
+                      <Phone size={18} className="text-accent-gold" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-accent-stone uppercase">Phone</p>
+                      <p className="text-white font-semibold">+91 98765 43210</p>
+                    </div>
                   </a>
                   <a
                     href="mailto:info@fusioncars.com"
-                    className="flex items-center gap-3 text-accent-stone hover:text-accent-gold transition"
+                    className="flex items-center gap-3 text-accent-stone hover:text-accent-gold transition group"
                   >
-                    <Mail size={20} />
-                    <span>info@fusioncars.com</span>
+                    <div className="p-2.5 bg-accent-gold/20 rounded-lg group-hover:bg-accent-gold/30 transition">
+                      <Mail size={18} className="text-accent-gold" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-accent-stone uppercase">Email</p>
+                      <p className="text-white font-semibold text-sm">info@fusioncars.com</p>
+                    </div>
                   </a>
                 </div>
               </motion.div>
 
-              {/* Key Features */}
+              {/* Quick Highlights */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal"
+                className="bg-primary-dark rounded-2xl p-6 border border-accent-charcoal"
               >
-                <h3 className="text-white font-bold mb-4">Key Features</h3>
-                <ul className="space-y-2 text-accent-stone text-sm">
-                  <li>✓ {car.transmission} Transmission</li>
-                  <li>✓ {car.fuelType} Fuel</li>
-                  <li>✓ {car.mileage} KMPL Mileage</li>
-                  <li>✓ {car.year} Model Year</li>
-                  <li>✓ Full Service History</li>
-                  <li>✓ Genuine Documentation</li>
+                <h3 className="text-white font-bold mb-4 text-lg">Highlights</h3>
+                <ul className="space-y-2.5 text-sm">
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-accent-gold mt-1">✓</span>
+                    <span className="text-accent-stone">Full Service History</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-accent-gold mt-1">✓</span>
+                    <span className="text-accent-stone">Zero Accident</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-accent-gold mt-1">✓</span>
+                    <span className="text-accent-stone">Genuine Documents</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-accent-gold mt-1">✓</span>
+                    <span className="text-accent-stone">Professionally Detailed</span>
+                  </li>
                 </ul>
               </motion.div>
             </div>
@@ -205,26 +275,34 @@ export default function CarDetail() {
             transition={{ delay: 0.4 }}
             className="space-y-8"
           >
-            {/* Tab Navigation */}
-            <div className="flex gap-4 overflow-x-auto pb-4">
+            {/* Tab Navigation - Modern Design */}
+            <div className="flex gap-2 overflow-x-auto pb-4 border-b border-accent-charcoal/30">
               {[
-                { id: 'gallery', label: 'Gallery' },
                 { id: 'overview', label: 'Overview' },
-                { id: 'inspection', label: 'Inspection Report' },
-                { id: 'reviews', label: 'Customer Reviews' },
                 { id: 'specifications', label: 'Specifications' },
+                { id: 'gallery', label: 'Gallery' },
+                { id: 'inspection', label: 'Inspection' },
+                { id: 'reviews', label: 'Reviews' },
               ].map((tab) => (
-                <button
+                <motion.button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`px-6 py-3 rounded-lg font-bold whitespace-nowrap transition ${
+                  className={`px-6 py-3 font-semibold whitespace-nowrap transition relative text-sm ${
                     activeTab === tab.id
-                      ? 'bg-accent-gold text-primary-black'
-                      : 'bg-primary-dark text-accent-stone border border-accent-charcoal hover:border-accent-gold'
+                      ? 'text-accent-gold'
+                      : 'text-accent-stone hover:text-accent-gold'
                   }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {tab.label}
-                </button>
+                  {activeTab === tab.id && (
+                    <motion.div
+                      layoutId="underline"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-accent-gold to-accent-platinum"
+                    />
+                  )}
+                </motion.button>
               ))}
             </div>
 
@@ -259,36 +337,36 @@ function OverviewTab({ car }) {
       className="space-y-6"
     >
       {/* Vehicle Summary */}
-      <div className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal">
-        <h3 className="text-2xl font-bold text-white mb-4">Vehicle Summary</h3>
-        <p className="text-accent-stone mb-4">
+      <div className="bg-primary-dark rounded-2xl p-8 border border-accent-charcoal">
+        <h3 className="text-2xl font-bold text-white mb-4">About This Vehicle</h3>
+        <p className="text-accent-stone mb-6 leading-relaxed">
           Experience luxury with this premium {car.year} {car.brand} {car.model}. With meticulous maintenance and comprehensive service history, this vehicle offers the perfect blend of performance and reliability.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-primary-charcoal p-4 rounded-lg">
-            <p className="text-accent-stone text-sm mb-1">Fuel Efficiency</p>
+          <div className="bg-primary-charcoal/50 p-5 rounded-xl border border-accent-charcoal/50 hover:border-accent-gold/30 transition">
+            <p className="text-accent-stone text-xs uppercase tracking-wider mb-2">Fuel Efficiency</p>
             <p className="text-2xl font-bold text-accent-gold">{car.mileage} KMPL</p>
           </div>
-          <div className="bg-primary-charcoal p-4 rounded-lg">
-            <p className="text-accent-stone text-sm mb-1">Transmission</p>
+          <div className="bg-primary-charcoal/50 p-5 rounded-xl border border-accent-charcoal/50 hover:border-accent-gold/30 transition">
+            <p className="text-accent-stone text-xs uppercase tracking-wider mb-2">Transmission</p>
             <p className="text-2xl font-bold text-accent-gold">{car.transmission}</p>
           </div>
-          <div className="bg-primary-charcoal p-4 rounded-lg">
-            <p className="text-accent-stone text-sm mb-1">Fuel Type</p>
+          <div className="bg-primary-charcoal/50 p-5 rounded-xl border border-accent-charcoal/50 hover:border-accent-gold/30 transition">
+            <p className="text-accent-stone text-xs uppercase tracking-wider mb-2">Fuel Type</p>
             <p className="text-2xl font-bold text-accent-gold">{car.fuelType}</p>
           </div>
-          <div className="bg-primary-charcoal p-4 rounded-lg">
-            <p className="text-accent-stone text-sm mb-1">Body Type</p>
+          <div className="bg-primary-charcoal/50 p-5 rounded-xl border border-accent-charcoal/50 hover:border-accent-gold/30 transition">
+            <p className="text-accent-stone text-xs uppercase tracking-wider mb-2">Body Type</p>
             <p className="text-2xl font-bold text-accent-gold">{car.bodyType || 'Sedan'}</p>
           </div>
         </div>
       </div>
 
       {/* Highlights */}
-      <div className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal">
-        <h3 className="text-2xl font-bold text-white mb-4">Why Choose This Vehicle?</h3>
-        <ul className="space-y-3">
+      <div className="bg-primary-dark rounded-2xl p-8 border border-accent-charcoal">
+        <h3 className="text-2xl font-bold text-white mb-6">Why Choose This Vehicle?</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
             'Complete service history with authorized service center',
             'Zero accident history - thoroughly inspected',
@@ -297,12 +375,12 @@ function OverviewTab({ car }) {
             'Extended warranty available',
             'Professional detailing and certification',
           ].map((item, idx) => (
-            <li key={idx} className="flex items-start gap-3 text-accent-stone">
-              <span className="text-accent-gold font-bold mt-1">✓</span>
-              <span>{item}</span>
-            </li>
+            <div key={idx} className="flex items-start gap-3 p-4 bg-primary-charcoal/30 rounded-xl border border-accent-charcoal/50 hover:border-accent-gold/20 transition">
+              <span className="text-accent-gold font-bold text-lg mt-0.5 flex-shrink-0">✓</span>
+              <span className="text-accent-stone text-sm leading-relaxed">{item}</span>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </motion.div>
   );
@@ -317,9 +395,9 @@ function SpecificationsTab({ car }) {
       className="grid grid-cols-1 md:grid-cols-2 gap-6"
     >
       {/* Basic Information */}
-      <div className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal">
-        <h3 className="text-xl font-bold text-white mb-4">Basic Information</h3>
-        <div className="space-y-3">
+      <div className="bg-primary-dark rounded-2xl p-8 border border-accent-charcoal">
+        <h3 className="text-xl font-bold text-white mb-6">Basic Information</h3>
+        <div className="space-y-4">
           <SpecRow label="Brand" value={car.brand} />
           <SpecRow label="Model" value={car.model} />
           <SpecRow label="Year" value={car.year} />
@@ -329,9 +407,9 @@ function SpecificationsTab({ car }) {
       </div>
 
       {/* Engine & Performance */}
-      <div className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal">
-        <h3 className="text-xl font-bold text-white mb-4">Engine & Performance</h3>
-        <div className="space-y-3">
+      <div className="bg-primary-dark rounded-2xl p-8 border border-accent-charcoal">
+        <h3 className="text-xl font-bold text-white mb-6">Engine & Performance</h3>
+        <div className="space-y-4">
           <SpecRow label="Engine Displacement" value={car.engineCc || '2000 CC'} />
           <SpecRow label="Fuel Type" value={car.fuelType} />
           <SpecRow label="Transmission" value={car.transmission} />
@@ -341,9 +419,9 @@ function SpecificationsTab({ car }) {
       </div>
 
       {/* Comfort Features */}
-      <div className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal">
-        <h3 className="text-xl font-bold text-white mb-4">Comfort Features</h3>
-        <div className="space-y-2 text-accent-stone text-sm">
+      <div className="bg-primary-dark rounded-2xl p-8 border border-accent-charcoal">
+        <h3 className="text-xl font-bold text-white mb-6">Comfort Features</h3>
+        <div className="space-y-3 text-accent-stone text-sm">
           {[
             'Leather Interior',
             'Automatic Climate Control',
@@ -352,18 +430,18 @@ function SpecificationsTab({ car }) {
             'Cruise Control',
             'Touchscreen Infotainment',
           ].map((feature, idx) => (
-            <div key={idx} className="flex items-center gap-2">
-              <span className="text-accent-gold">✓</span>
-              {feature}
+            <div key={idx} className="flex items-center gap-3">
+              <span className="text-accent-gold font-bold text-lg">✓</span>
+              <span>{feature}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Safety Features */}
-      <div className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal">
-        <h3 className="text-xl font-bold text-white mb-4">Safety Features</h3>
-        <div className="space-y-2 text-accent-stone text-sm">
+      <div className="bg-primary-dark rounded-2xl p-8 border border-accent-charcoal">
+        <h3 className="text-xl font-bold text-white mb-6">Safety Features</h3>
+        <div className="space-y-3 text-accent-stone text-sm">
           {[
             'ABS (Anti-lock Braking System)',
             'Dual Front Airbags',
@@ -372,9 +450,9 @@ function SpecificationsTab({ car }) {
             'Child Safety Locks',
             'Brake Assist',
           ].map((feature, idx) => (
-            <div key={idx} className="flex items-center gap-2">
-              <span className="text-accent-gold">✓</span>
-              {feature}
+            <div key={idx} className="flex items-center gap-3">
+              <span className="text-accent-gold font-bold text-lg">✓</span>
+              <span>{feature}</span>
             </div>
           ))}
         </div>
@@ -391,13 +469,7 @@ function GalleryTab({ car }) {
       animate={{ opacity: 1 }}
       className="space-y-6"
     >
-      <div className="bg-primary-dark rounded-lg p-6 border border-accent-charcoal">
-        <h3 className="text-2xl font-bold text-white mb-4">Image Gallery</h3>
-        <p className="text-accent-stone mb-6">
-          Browse through our extensive collection of high-quality images of this vehicle
-        </p>
-        <CarImageGallery car={car} />
-      </div>
+      <CarImageGallery car={car} />
     </motion.div>
   );
 }
@@ -405,9 +477,9 @@ function GalleryTab({ car }) {
 // Specification Row Component
 function SpecRow({ label, value }) {
   return (
-    <div className="flex justify-between items-center py-2 border-b border-accent-charcoal/30">
-      <span className="text-accent-stone text-sm">{label}</span>
-      <span className="text-white font-semibold">{value}</span>
+    <div className="flex justify-between items-center py-3 border-b border-accent-charcoal/30 last:border-b-0">
+      <span className="text-accent-stone text-sm font-medium">{label}</span>
+      <span className="text-white font-semibold text-lg">{value}</span>
     </div>
   );
 }
