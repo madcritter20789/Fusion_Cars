@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
-import { ChevronRight, Search, ArrowRight, Star } from 'lucide-react';
+import { ChevronRight, Search, X, Star } from 'lucide-react';
 import { useState, useRef } from 'react';
+import { useRouter } from 'next/router';
 
 /**
  * Luxury Hero Component - ULTRA MODERN REDESIGN
@@ -20,6 +21,18 @@ import { useState, useRef } from 'react';
 export default function Hero({ videoBackground = null, enableVideo = false }) {
   const [searchQuery, setSearchQuery] = useState('');
   const ref = useRef(null);
+  const router = useRouter();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/inventory?search=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+  };
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -163,60 +176,43 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
               </p>
             </motion.div>
 
-            {/* Premium Search Bar - Previous Style */}
+            {/* Premium Search Bar - With Icon Toggle */}
             <motion.div
               variants={itemVariants}
               className="blur-modern rounded-2xl p-2 flex flex-col sm:flex-row gap-3 shadow-luxury-lg overflow-hidden"
             >
-              <input
-                type="text"
-                placeholder="Search by make, model, or type..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 px-4 py-2.5 rounded-lg bg-white/5 text-white placeholder-neutral-400 border border-white/10 focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition-all text-sm"
-                aria-label="Search luxury cars"
-              />
-              <Link href="/inventory" className="overflow-hidden">
-                <motion.button
-                  whileHover={{ scale: 1.02, y: -1 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="btn-secondary w-full sm:w-auto px-6 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden h-full text-sm"
-                  aria-label="Search our collection"
-                >
-                  <Search className="w-4 h-4 relative z-10" />
-                  <span className="relative z-10">Search</span>
-                </motion.button>
-              </Link>
+              <div className="flex-1 relative flex items-center">
+                <Search className="absolute left-4 w-4 h-4 text-neutral-400 pointer-events-none" />
+                <input
+                  type="text"
+                  placeholder="Search by make, model, or type..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSearch(e)}
+                  className="flex-1 pl-10 pr-4 py-2.5 rounded-lg bg-white/5 text-white placeholder-neutral-400 border border-white/10 focus:outline-none focus:border-luxury-gold focus:ring-2 focus:ring-luxury-gold/20 transition-all text-sm"
+                  aria-label="Search luxury cars"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={handleClearSearch}
+                    className="absolute right-4 text-neutral-400 hover:text-white transition-colors"
+                    aria-label="Clear search"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+              <motion.button
+                onClick={handleSearch}
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-secondary w-full sm:w-auto px-6 whitespace-nowrap flex items-center justify-center gap-2 relative overflow-hidden h-full text-sm"
+                aria-label="Discover our collection"
+              >
+                <span className="relative z-10">Discover Collection</span>
+              </motion.button>
             </motion.div>
 
-            {/* Luxury CTA Buttons */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-3 pt-2"
-              variants={itemVariants}
-            >
-              <Link href="/inventory" className="flex-1">
-                <motion.button
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="btn-primary w-full text-sm py-3 flex items-center justify-center gap-2 group"
-                  aria-label="Browse premium vehicle collection"
-                >
-                  View Inventory
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </motion.button>
-              </Link>
-
-              <Link href="/contact" className="flex-1">
-                <motion.button
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="btn-secondary-white w-full text-sm py-3"
-                  aria-label="Schedule private viewing"
-                >
-                  <span className="relative z-10">Book Consultation</span>
-                </motion.button>
-              </Link>
-            </motion.div>
 
             {/* Trust Indicators - Refined Metrics */}
             <motion.div
@@ -261,18 +257,6 @@ export default function Hero({ videoBackground = null, enableVideo = false }) {
 
                   {/* Sophisticated gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-                  {/* Premium vehicle badge overlay */}
-                  <motion.div
-                    className="absolute top-8 right-8"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.8 }}
-                  >
-                    <div className="glass-light px-4 py-2 rounded-full">
-                      <p className="text-white text-sm font-semibold uppercase tracking-wide">New Arrival</p>
-                    </div>
-                  </motion.div>
                 </div>
               </div>
 

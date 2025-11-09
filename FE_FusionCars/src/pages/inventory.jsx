@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CarCard from '../components/CarCard';
@@ -19,6 +20,7 @@ import { Filter } from 'lucide-react';
  * - Accessibility features
  */
 export default function Inventory() {
+  const router = useRouter();
   const [filters, setFilters] = useState({
     brand: '',
     fuelType: '',
@@ -32,6 +34,16 @@ export default function Inventory() {
 
   const [sortBy, setSortBy] = useState('featured');
   const [showFilters, setShowFilters] = useState(false);
+
+  // Load search query from URL on mount
+  useEffect(() => {
+    if (router.isReady && router.query.search) {
+      setFilters((prev) => ({
+        ...prev,
+        search: router.query.search,
+      }));
+    }
+  }, [router.isReady, router.query.search]);
 
   // Extract unique values for filters
   const brands = [...new Set(cars.cars.map((car) => car.brand))];
