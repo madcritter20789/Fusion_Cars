@@ -141,11 +141,11 @@ export default function Inventory() {
         </div>
       </section>
 
-      <div className="min-h-screen bg-gray-50 py-12">
+      <div className="min-h-screen bg-black py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top Filter Bar */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-12 pb-6 border-b border-gray-200">
-            <p className="text-lg font-semibold text-gray-900">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-12 pb-6 border-b border-gray-800">
+            <p className="text-lg font-semibold text-white">
               Total {filteredCars.length} Results Found
             </p>
 
@@ -153,7 +153,7 @@ export default function Inventory() {
               {/* Filter Button */}
               <button
                 onClick={() => setShowFilters(true)}
-                className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-gray-900 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white transition-colors"
                 aria-label="Open filters"
               >
                 <Filter className="w-5 h-5" />
@@ -164,7 +164,7 @@ export default function Inventory() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                className="px-4 py-2 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-900"
                 aria-label="Sort results"
               >
                 <option value="featured">Sort by</option>
@@ -212,16 +212,16 @@ export default function Inventory() {
             </motion.div>
           ) : (
             <motion.div
-              className="text-center py-12 bg-white rounded-lg border border-gray-200"
+              className="text-center py-12 bg-gray-900 rounded-lg border border-gray-800"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              <p className="text-xl text-gray-600 mb-4">No vehicles match your criteria</p>
+              <p className="text-xl text-gray-300 mb-4">No vehicles match your criteria</p>
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={resetFilters}
-                className="px-6 py-3 bg-gray-900 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors"
+                className="px-6 py-3 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition-colors"
               >
                 Clear Filters
               </motion.button>
