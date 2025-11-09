@@ -79,14 +79,14 @@ module.exports = {
       },
 
       fontFamily: {
-        // Elegant luxury serif for headings
-        serif: ['Playfair Display', 'Georgia', 'serif'],
-        // Clean modern sans-serif for body
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        // Display font same as serif for consistency
-        display: ['Playfair Display', 'serif'],
-        // Refined body text
-        body: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        // Bold heading font - Montserrat
+        serif: ['Montserrat', 'sans-serif'],
+        // Clean modern sans-serif for body - Open Sans
+        sans: ['Open Sans', 'system-ui', '-apple-system', 'sans-serif'],
+        // Display font - Montserrat for headings
+        display: ['Montserrat', 'sans-serif'],
+        // Refined body text - Open Sans
+        body: ['Open Sans', 'system-ui', '-apple-system', 'sans-serif'],
       },
 
       fontSize: {
